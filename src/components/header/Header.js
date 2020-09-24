@@ -5,12 +5,12 @@ import CalgaryMenu from "./CalgaryMenu";
 
 
 const Header = () => {
+
     return (
         <div>
             <AdBar context='Free Shipping on Office Chairs + 0% Financing Available'/>
             <HeadMenu />
             <CalgaryMenu/>
-
         </div>
     );
 };

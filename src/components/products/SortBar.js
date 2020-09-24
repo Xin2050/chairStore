@@ -1,7 +1,16 @@
 import React, {useState} from 'react';
+import {sortProducts} from "../../actions";
+import {connect} from 'react-redux';
+import {Link} from "react-router-dom";
 
-const SortBar = ({everyPageShow,total,onChangeGridColum,colum}) => {
+const SortBar = ({everyPageShow,total,onChangeGridColum,colum,sortProducts}) => {
     const [colums,setColum] = useState(colum)
+    const [order_price,setOrder_price]=useState(null);
+
+    const changeOrderPrice = ()=>{
+        setOrder_price(!order_price);
+        sortProducts("price",order_price);
+    }
     const changeColum=(x)=>{
         setColum(x)
         onChangeGridColum(x)
@@ -17,29 +26,34 @@ const SortBar = ({everyPageShow,total,onChangeGridColum,colum}) => {
                 </div>
             </div>
             <div className="sortBar__left">
-                <a href="#" className="menuBtn sortBar__item">
+                <Link to="#" className="menuBtn sortBar__item" onClick={changeOrderPrice}>
                     Price
-                    <i className="fas fa-caret-down sortBar__icon--margin" ></i>
-                </a>
-                <a href="#" className="menuBtn sortBar__item">
+                    {
+                        order_price==null?null:
+                        order_price?<i className="fas fa-caret-down sortBar__icon--margin" ></i>:
+                        <i className="fas fa-caret-up sortBar__icon--margin" ></i>
+                    }
+
+                </Link>
+                <Link to="#" className="menuBtn sortBar__item">
                     Material
                     <i className="fas fa-caret-down sortBar__icon--margin" ></i>
-                </a>
-                <a href="#" className="menuBtn sortBar__item">
+                </Link>
+                <Link to="#" className="menuBtn sortBar__item">
                     Sort By: Featured Products
                     <i className="fas fa-caret-down sortBar__icon--margin" ></i>
-                </a>
+                </Link>
             </div>
             <div className="sortBar__right">
             Showing {everyPageShow} of {total} items
             <div className="sortBar__setGrid">
 
-                <a href="#" className="menuBtn" onClick={()=>{changeColum(3)}}>
+                <Link to="#" className="menuBtn" onClick={()=>{changeColum(3)}}>
                     <i className={`fas fa-grip-horizontal sortBar__gridIcon--margin${unselected_3}`}></i>
-                </a>
-                <a href="#" className="menuBtn" onClick={()=>{changeColum(2)}}>
+                </Link>
+                <Link to="#" className="menuBtn" onClick={()=>{changeColum(2)}}>
                     <i className={`fas fa-th-large sortBar__gridIcon--margin${unselected_2}`}></i>
-                </a>
+                </Link>
             </div>
             </div>
 
@@ -47,4 +61,4 @@ const SortBar = ({everyPageShow,total,onChangeGridColum,colum}) => {
     );
 };
 
-export default SortBar;
+export default connect(null,{sortProducts})(SortBar);

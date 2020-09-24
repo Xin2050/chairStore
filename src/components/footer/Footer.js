@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
 const Footer = () => {
     return (
@@ -49,25 +50,25 @@ const Footer = () => {
                     Join our mailing list<p/>
                     <div className="footer__followUs__inputBox">
                         <input className="footer__followUs__input" type="text" placeholder="Enter your email"/>
-                        <a href="#" className="btnSignUP">Sign Up</a>
+                        <Link to="#" className="btnSignUP">Sign Up</Link>
                     </div>
 
                 </div>
                 <div className="footer__followUs__title">
                     Follow Us
                     <div className="footer__followUs__Socials__icons">
-                        <a href="#" className="menuBtn footer__followUs__Socials__icon">
+                        <Link to="#" className="menuBtn footer__followUs__Socials__icon">
                             <i className="fab fa-twitter-square"></i>
-                        </a>
-                        <a href="#" className="menuBtn footer__followUs__Socials__icon">
+                        </Link>
+                        <Link to="#" className="menuBtn footer__followUs__Socials__icon">
                             <i className="fab fa-facebook-square"></i>
-                        </a>
-                        <a href="#" className="menuBtn footer__followUs__Socials__icon">
+                        </Link>
+                        <Link to="#" className="menuBtn footer__followUs__Socials__icon">
                             <i className="fab fa-instagram-square"></i>
-                        </a>
-                        <a href="#" className="menuBtn footer__followUs__Socials__icon">
+                        </Link>
+                        <Link to="#" className="menuBtn footer__followUs__Socials__icon">
                             <i className="fab fa-pinterest-square"></i>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

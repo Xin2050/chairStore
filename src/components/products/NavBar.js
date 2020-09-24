@@ -1,9 +1,10 @@
 import React from 'react';
 
-const NavBar = () => {
+const NavBar = ({context}) => {
+
     return (
         <div className="navBar">
-            Home > Office
+            {context}
         </div>
     );
 };
