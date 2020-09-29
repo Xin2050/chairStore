@@ -80,7 +80,7 @@ class ProductsList extends React.Component {
         return (
             <div className="mainContext">
                 <NavBar context="Home > Office"/>
-                <MainContextH1 title="New" />
+                <MainContextH1 title="Office Chairs" />
                 <SortBar everyPageShow={this.props.products.length}
                     total={this.props.products.length}
                     onChangeGridColum={this.changeGridColum}

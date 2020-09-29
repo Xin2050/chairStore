@@ -1,0 +1,84 @@
+
+
+.sortBar {
+  margin: 1rem 0 2rem 0;
+  font-size: 1.5rem;
+  word-spacing: .3rem;
+
+  @include respond(tablet){
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 1.5rem;
+    border-bottom: rgb(177, 177, 177) 1px solid;
+  }
+
+
+  &__right {
+    display: inline-flex;
+  }
+  &__left{
+
+    @include respond(tablet){
+      display: none;
+    }
+  }
+  &__setGrid{
+    @include respond(tablet){
+      display: none;
+    }
+
+  }
+  &__icon--margin {
+    margin-left: 2rem;
+  }
+
+  &__item {
+    margin-right: 2rem;
+  }
+
+  &__gridIcon {
+    &--margin {
+      margin-left: 1rem;
+    }
+
+    &--unselected {
+      color: gray;
+    }
+  }
+
+
+}
+
+
+
+
+.mediaSrc{
+
+  &__toggle-mobile-filter{
+
+    @include respond(tablet){
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      border: black 1px solid;
+      padding: 1rem 1rem;
+      margin-bottom: 1rem;
+      &:hover {
+        cursor: pointer;
+      }
+      & i {
+        transform: translateY(20%);
+      }
+    }
+  }
+
+
+  &__FilterDiv {
+    display: none;
+    @include respond(tablet) {
+      display: block;
+      width: 100%;
+    }
+  }
+}
+

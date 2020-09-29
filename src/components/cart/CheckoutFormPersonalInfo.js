@@ -7,8 +7,6 @@ import StanderInputText from "../form/StanderInputText";
 import StanderRadioGroup from "../form/StanderRadioGroup";
 import StanderCheck from "../form/StanderCheck";
 
-//import {reduxForm,getFormMeta,getFormAsyncErrors} from "redux-form";
-
 
 const CheckoutFormPersonalInfo = (props) => {
     //console.log(props); //there are nothing

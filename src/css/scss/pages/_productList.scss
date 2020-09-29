@@ -1,0 +1,161 @@
+
+#productslist{
+
+
+  @include respond(tablet){
+    grid-template-columns: repeat(2, 49.5%);
+  }
+
+
+
+}
+
+.productsGrid{
+  &--2{
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(2, 49.5%);
+    grid-row-gap: .5rem;
+  }
+  &--3 {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(3, 33.33%);
+    grid-row-gap: .5rem;
+  }
+}
+
+.productCard {
+
+  width: 95%;
+  max-width: 28rem;
+  padding-bottom: 1.4rem;
+  overflow: hidden;
+
+  &__animation-addToCart{
+    animation: addToCart .8s cubic-bezier(.08,.82,.87,.23);
+  }
+
+
+}
+.product__Img {
+  height:35rem;
+  overflow: hidden;
+
+
+  & img:first-child {
+    height: 100%;
+    transform: translateX(-20%);
+  }
+
+  &:last-child {
+
+    display: none;
+  }
+
+  &:hover img:first-child {
+    display: none;
+  }
+
+  &:hover img:last-child {
+    display: inline-block;
+    height: 100%;
+    transform: translateX(-20%);
+  }
+}
+
+.product{
+  &__name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: .08rem;
+    padding-left: .5rem;
+  }
+
+  &__price {
+    margin-top: 1rem;
+    margin-left:.5rem;
+    font-size: 1.2rem;
+    color: gray;
+  }
+
+  &__freeShipping {
+    font-size: 1.2rem;
+    color: red;
+    padding-left: .5rem;
+  }
+
+  &__colors {
+    display: flex;
+    flex-direction: row;
+
+  }
+}
+
+
+
+.divBtn {
+  margin: .5rem .5rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  outline: rgb(44, 121, 221) 1px solid;
+  outline-offset: 1px;
+  &:hover {
+    cursor: pointer;
+  }
+
+  &--red {
+    background-color: rgb(223, 94, 94);
+  }
+
+  &--black {
+    background-color: black;
+  }
+
+  &--gray {
+    background-color: gray;
+  }
+
+  &--blue {
+    background-color: rgb(80, 97, 194);
+  }
+
+  &--pink {
+    background-color: rgb(240, 143, 240);
+  }
+
+  &--white {
+    background-color: wheat;
+  }
+}
+
+
+.product__addToCart {
+  padding: .2rem .5rem;
+  &{
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: 700;
+    display: inline-block;
+    color: transparent;
+    background-image: linear-gradient(180deg, #2af598 0%, #009efd 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    transition: all .2s;
+  }
+  &:hover{
+    transform: scale(1.05);
+  }
+  &:active{
+    transform: scale(0.9);
+  }
+
+}
+
+.product__addCartButtonDiv {
+  margin-top: .5rem;
+  margin-left: .2rem;
+
+}
+
+

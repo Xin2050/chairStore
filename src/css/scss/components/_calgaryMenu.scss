@@ -1,0 +1,154 @@
+
+.calgaryMenu {
+  background-color: rgb(255, 255, 255);
+  color: black;
+  font-size: 1.5rem;
+  border-right: rgb(190, 190, 190) 1px solid;
+  border-bottom: rgb(190, 190, 190) 1px solid;
+  position: relative;
+  display: block;
+  height: 9rem;
+  padding: 1rem 1rem;
+  @include clearfix;
+
+  &__search {
+    float:right;
+    width: 5rem;
+    height: 100%;
+    font-size: 2.5rem;
+    position:relative;
+
+    @include respond(tablet){
+      color: rgb(45, 43, 43);
+      font-size: 2.5rem;
+      width: 10rem;
+      margin-right: 2.5rem;
+    }
+    @include respond(phone){
+      width: 6rem;
+      margin-right: .5rem;
+    }
+    &__icongroup{
+      width: 100%;
+
+      @include absCenter;
+    }
+    &__icon{
+
+      @include respond(tablet){
+        margin-right:2rem;
+        display: inline-block;
+      }
+      @include respond(phone){
+        margin-right: .2rem;
+        font-size: 2rem;
+      }
+
+    }
+  }
+  &__Items{
+    @include absCenter;
+
+    @include respond(tablet){
+      display: none;
+    }
+  }
+
+  &__Item {
+    //display: inline-block;
+    padding: 3.5rem 0;
+    height: 9rem;
+    margin: 0 1rem;
+
+    &--selected {
+      border-bottom-color: red !important;
+    }
+  }
+}
+
+.logoBox {
+  float:left;
+  height: 100%;
+  width: 8rem;
+  position:relative;
+
+  @include respond(tablet){
+    float:none;
+    display: block;
+    position: relative;
+    width: auto;
+    height: auto;
+    @include absCenter;
+  }
+
+}
+.logo{
+  @include absCenter;
+  height: 4rem;
+  width: 4rem;
+  @include respond(tablet){
+    display: inline-block;
+    position: relative;
+
+    top:auto;
+    left:auto;
+    transform: none;
+  }
+  @include respond(phone){
+    width:3rem;
+    height: 3rem;
+  }
+  &__img{
+    width: 100%;
+    @include respond(tablet){
+      vertical-align: middle;
+    }
+  }
+}
+.mediaSrc{
+
+  &__mainMenuIcon{
+    display: none;
+    position: relative;
+
+    @include respond(tablet){
+      float:left;
+      display: block;
+      width: 8rem;
+      height: 100%;
+      font-size: 3rem;
+    }
+    @include respond(phone){
+      font-size: 2.5rem;
+    }
+    &--center{
+      @include absCenter;
+    }
+  }
+  &__CompanyName{
+    display: none;
+    @include respond(tablet){
+      display: inline-block;
+      color: red;
+      font-size: 2rem;
+      letter-spacing: .2rem;
+      vertical-align: middle;
+      margin-left:1.5rem;
+
+    }
+    @include respond(phone){
+      font-size: 1.5rem;
+      letter-spacing: .1rem;
+    }
+  }
+  &__cartIcon{
+    display: none;
+    @include respond(tablet){
+      display: inline-block;
+      margin-left: 1rem;
+    }
+    @include respond(phone){
+      font-size: 2rem;
+    }
+  }
+}

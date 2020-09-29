@@ -3,15 +3,21 @@ import {Link} from "react-router-dom";
 
 const CalgaryMenu = () => {
     return (
-        <div className="calgaryMenu flex_Row_SpaceBetween_Center">
-            <div className="mediaSrc__mainMenu">
-                <i className="fas fa-bars"></i>
+        <div className="calgaryMenu">
+            <div className="mediaSrc__mainMenuIcon">
+                <i className="fas fa-bars mediaSrc__mainMenuIcon--center"></i>
             </div>
             <div className="logoBox">
-                <img src="/images/logo-small.svg" className="logo" alt="Logo"/>
-                <div className="mediaSrc__CompanyName">HermanMiller</div>
+
+                    <div className="logo">
+                        <img src="/images/logo-small.svg" className="logo__img" alt="Logo"/>
+                    </div>
+                    <div className="mediaSrc__CompanyName">HermanMiller</div>
+
             </div>
-            <div className="calgaryMenu__Items flex_Row_Middle_Center">
+
+
+            <div className="calgaryMenu__Items">
                 <Link to="#" className="menuBtn--redLine calgaryMenu__Item">New</Link>
                 <Link to="/" className="menuBtn--redLine calgaryMenu__Item calgaryMenu__Item--selected">Office</Link>
                 <Link to="#" className="menuBtn--redLine calgaryMenu__Item">Living</Link>
@@ -22,9 +28,13 @@ const CalgaryMenu = () => {
                 <Link to="#" className="menuBtn--redLine calgaryMenu__Item">Accessories</Link>
                 <Link to="#" className="menuBtn--redLine calgaryMenu__Item">Gaming</Link>
             </div>
+
+
             <div className="menuBtn calgaryMenu__search">
-                <i className="fas fa-search"></i>
-                <i className="fas fa-shopping-cart mediaSrc__cartIcon"/>
+                <div className="calgaryMenu__search__icongroup">
+                    <i className="fas fa-search calgaryMenu__search__icon"></i>
+                    <i className="fas fa-shopping-cart mediaSrc__cartIcon"/>
+                </div>
             </div>
         </div>
     );

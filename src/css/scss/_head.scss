@@ -1,0 +1,174 @@
+
+.menuBtn {
+
+  &:link,
+  &:visited {
+    text-decoration: none;
+    color: black;
+    border-bottom: rgba(0, 0, 0, 0) 2px solid;
+  }
+
+  &:hover {
+    opacity: 0.5;
+  }
+
+  &--redLine {
+
+    &:link,
+    &:visited {
+      text-decoration: none;
+      color: black;
+      border-bottom: rgba(0, 0, 0, 0) 2px solid;
+    }
+
+    &:hover {
+      border-bottom-color: red !important;
+    }
+  }
+}
+
+
+
+
+
+.header__ADBar {
+  background-color: rgb(214, 48, 48);
+  padding: .5rem 0;
+
+  &__context {
+    font-size: 1.7rem;
+    color: azure;
+    text-align: center;
+    @include respond(tablet){
+      font-size: 1.2rem;
+      color: azure;
+      text-align: left;
+      margin-left: 2rem;
+    }
+  }
+
+  &__closeBox {
+    float: right;
+    margin-right: 1rem;
+  }
+
+  &__closeButton:hover {
+    cursor: pointer;
+    animation: closeADButton 1s;
+  }
+
+}
+
+
+
+
+
+.headMenu {
+  background-color: rgb(230, 230, 230);
+  font-size: 1.2rem;
+  border: rgba(226, 217, 217, 0.9) 1px solid;
+  border-right: rgb(190, 190, 190) 1px solid;
+  position:relative;
+  white-space: nowrap;
+
+  height: 5rem;
+  @include clearfix;
+
+  &__Btn--Selected {
+    font-weight: bold;
+    border-bottom-color: navy !important;
+  }
+
+  &__centerContext{
+    @include absCenter;
+
+    @include respond(tablet-middle){
+      display: none;
+    }
+
+  }
+
+  &__centerContext__m2 {
+    margin-left: 3rem;
+  }
+
+  &__Items {
+    display: block;
+    float:left;
+    height:100%;
+    position:relative;
+
+
+
+
+    @include respond(phone){
+      width: 100%;
+    }
+  }
+
+  &__Item {
+    //padding: 1.5rem;
+    width: 8rem;
+    display: inline-block;
+    position: relative;
+    height: 100%;
+    border-bottom: rgba(0, 0, 0, 0) 2px solid;
+
+    &:first-child {
+      border-left: darkgrey 1px solid;
+      margin-left: 3rem;
+    }
+
+    &:last-child {
+      border-right: darkgrey 1px solid;
+      border-left: darkgrey 1px solid;
+    }
+    @include respond(phone){
+      width: 50%;
+      text-align: center;
+      font-size: 1.5rem;
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+    &--middle{
+      @include absCenter
+    }
+  }
+
+
+  &__functions{
+    float: right;
+    height: 100%;
+    display: block;
+    position: relative;
+
+
+    @include respond(phone){
+      display: none;
+    }
+  }
+
+  &__function {
+    height:100%;
+    //margin-left:2rem;
+    display: inline-block;
+    position: relative;
+    width: 12rem;
+
+    &_icon {
+      color: $text-color-gray;
+      margin-left: 0.7rem;
+    }
+    &--color--gray{
+      color: $text-color-gray !important;
+    }
+  }
+
+}
+
+.cart__counter{
+  font-size: 1.2rem;
+  color: red;
+  margin-left: 1rem;
+}

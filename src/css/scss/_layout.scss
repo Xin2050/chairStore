@@ -1,0 +1,30 @@
+
+.mainContext {
+  border-right: rgb(190, 190, 190) 1px solid;
+  padding: 2rem 2rem 2rem 3rem;
+
+  &::after{
+    content:"";
+    display: table;
+    clear: both;
+  }
+
+  &__h1 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 4.5rem;
+  }
+}
+.flex_Row_SpaceBetween_Center {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex_Row_Middle_Center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}

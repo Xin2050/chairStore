@@ -1,0 +1,118 @@
+
+.footer {
+  background-color: rgb(218, 218, 218);
+  margin-bottom: 2rem;
+
+  &__list {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    padding: 2rem;
+
+    &__item {
+      font-size: 1.3rem;
+      color: black;
+      padding: 0 2rem;
+
+      &::first-line {
+        font-weight: bold;
+        font-size: 1.4rem;
+      }
+    }
+
+  }
+
+  &__followUs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 5rem 3rem 2rem 3rem;
+    &__title {
+      text-align: center;
+      font-size: 1.6rem;
+      font-weight: bold;
+      line-height: 3rem;
+    }
+    &__inputBox {
+      display: inline-flex;
+      position: relative;
+    }
+    &__input {
+      display: flex;
+      font-size: 1.2rem;
+      width: 15rem;
+      letter-spacing: .1rem;
+      padding: 1.2rem;
+      height: 100%;
+      outline: none;
+      border: gray 1px solid;
+      border-top-left-radius: 1rem;
+      border-bottom-left-radius: 1rem;
+
+      &:hover {
+        background-color: rgb(238, 238, 238);
+      }
+    }
+
+  }
+}
+
+.btnSignUP{
+
+  @include respond(tablet){
+    font-size: 1.2rem;
+    padding: .3rem .5rem .3rem .5rem;
+    width: 6rem;
+  }
+  &:visited,
+  &:link {
+    font-size: 1.5rem;
+    display: flex;
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    padding: .3rem 2rem .3rem 2rem;
+    border: black 1px solid;
+  }
+
+  &:hover {
+    opacity: .5;
+  }
+}
+
+.footer{
+
+
+
+
+  &__last {
+    background-color: rgb(196, 196, 196);
+    color: rgb(59, 59, 59);
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.3rem;
+    word-spacing: .3rem;
+  }
+  &__followUs{
+    &__Socials__icon {
+      font-size: 2rem;
+      margin: 1.5rem;
+    }
+
+    &__lang {
+      font-size: 1.2rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      &__item {
+        padding-left: 3rem;
+        width: 40%;
+      }
+      &__icon {
+        padding-right: 1rem;
+      }
+    }
+  }
+}

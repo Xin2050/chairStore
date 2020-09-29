@@ -1,0 +1,10 @@
+
+.navBar {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: grey;
+  word-spacing: .3rem;
+  @include respond(tablet){
+    display: none;
+  }
+}

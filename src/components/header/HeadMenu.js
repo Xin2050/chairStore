@@ -3,15 +3,15 @@ import {Link} from "react-router-dom";
 import {fetchCartList} from "../../actions";
 import {connect} from 'react-redux'
 
-class HeadMenu extends React.Component{
+class HeadMenu extends React.Component {
     componentDidMount() {
         this.props.fetchCartList();
     }
 
-    getCartCounter=()=>{
-        if(!this.props.counter){
+    getCartCounter = () => {
+        if (!this.props.counter) {
             return null;
-        }else{
+        } else {
 
             return <span className="cart__counter">({this.props.counter})</span>
         }
@@ -19,35 +19,45 @@ class HeadMenu extends React.Component{
 
     render() {
         return (
-            <div className="headMenu flex_Row_SpaceBetween_Center">
+            <div className="headMenu">
                 <div className="headMenu__Items">
-                    <Link to="#" className="menuBtn headMenu__Item headMenu__Btn--Selected">Store</Link>
-                    <Link to="#" className="menuBtn headMenu__Item">Contract</Link>
+                    <div className="headMenu__Item headMenu__Btn--Selected">
+                        <Link to="#" className="menuBtn headMenu__Item--middle">Store</Link>
+                    </div>
+                    <div className="headMenu__Item">
+                        <Link to="#" className="menuBtn headMenu__Item--middle">Contract</Link>
+                    </div>
                 </div>
                 <div className="headMenu__centerContext">
                     <Link to="" className="menuBtn headMenu__centerContext__m1">Customer Service</Link>
                     <Link to="" className="menuBtn headMenu__centerContext__m2">888 798 0202</Link>
                 </div>
                 <div className="headMenu__functions">
-                    <Link to="" className="menuBtn headMenu__function">
-                        My Account <i className="fas fa-user headMenu__function_icon"></i>
-                    </Link>
-                    <Link to="/cart" className="menuBtn headMenu__function">
-                        Cart <i className="fas fa-shopping-cart headMenu__function_icon"></i>
-                        {this.getCartCounter()}
-                    </Link>
+                    <div className="headMenu__function">
+                        <Link to="" className="menuBtn headMenu__Item--middle headMenu__function--color--gray">
+                            My Account <i className="fas fa-user headMenu__function_icon"></i>
+                        </Link>
+                    </div>
+                    <div className="headMenu__function">
+                        <Link to="/cart" className="menuBtn headMenu__Item--middle headMenu__function--color--gray">
+                            Cart <i className="fas fa-shopping-cart headMenu__function_icon"></i>
+                            {this.getCartCounter()}
+                        </Link>
+                    </div>
+
+
                 </div>
             </div>
         );
     }
 };
-const mapStateToProps=(state)=>{
+const mapStateToProps = (state) => {
 
-    if(!state.cart.data){
-       return {counter:"loading..."};
+    if (!state.cart.data) {
+        return {counter: "loading..."};
     }
- return {
-    counter:Object.values(state.cart.data).reduce((total,item)=>total+item.quantity,0)
- };
+    return {
+        counter: Object.values(state.cart.data).reduce((total, item) => total + item.quantity, 0)
+    };
 }
-export default connect(mapStateToProps,{fetchCartList})(HeadMenu);
+export default connect(mapStateToProps, {fetchCartList})(HeadMenu);
