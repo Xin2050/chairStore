@@ -6,10 +6,21 @@
   border-right: rgb(190, 190, 190) 1px solid;
   border-bottom: rgb(190, 190, 190) 1px solid;
   position: relative;
+  width: 100%;
   display: block;
   height: 9rem;
   padding: 1rem 1rem;
   @include clearfix;
+
+
+
+
+  &--fixed{
+    position: fixed;
+    top:0;
+    left:0;
+    z-index: 9;
+  }
 
   &__search {
     float:right;
@@ -48,21 +59,100 @@
   }
   &__Items{
     @include absCenter;
+    display: block;
+
 
     @include respond(tablet){
-      display: none;
+      @include cancelCenter;
+      //display: none;
+      visibility: hidden;
+      opacity: 0;
+      position: fixed;
+      top:0;
+      left:0;
+      height: 100%;
+      width: 100%;
+      background: rgba($primary-bg-color-gray-light,.8);
+      z-index: 10;
+      transition: transform .3s ease-in ;
+    }
+
+    &--show{
+      visibility: visible;
+      opacity: 1;
+
+      & div{
+        transform: translateX(100%);
+      }
+    }
+
+
+    &__list{
+      transition: transform .3s ease-in ;
+      transform: none;
+
+
+      @include respond(tablet){
+        position: fixed;
+        top:0;
+        left:-50%;
+        height:100%;
+        width:50%;
+        border:1px solid $primary-border-color-gray;
+        background: $primary-bg-color-gray-light;
+        box-shadow: 0 1rem 3rem rgba(black, .1);
+        z-index: 11;
+        display: flex;
+        flex-direction: column;
+      }
     }
   }
 
   &__Item {
-    //display: inline-block;
+
     padding: 3.5rem 0;
     height: 9rem;
     margin: 0 1rem;
 
+    @include respond(tablet){
+      width: 100%;
+      font-size: 1.7rem;
+      font-weight: bold;
+      padding: 2.2rem 2rem;
+      height: 7rem;
+      margin: 0;
+      background: white;
+      border-bottom:1px solid $primary-border-color-gray !important;
+      position: relative;
+      &::after{
+        content: "";
+        position: absolute;
+        top: 30%;
+        left: 76%;
+        display: inline-block;
+        border-top: 2px solid;
+        border-right: 2px solid;
+        width: 1.2rem;
+        height: 1.3rem;
+        border-color: rgba($text-color-gray,.5);
+        transform: rotate(45deg);
+        margin: 1rem auto auto 1rem;
+      }
+    }
+
+
     &--selected {
       border-bottom-color: red !important;
+      @include respond(tablet){
+        border-bottom:1px solid $primary-border-color-gray !important;
+      }
     }
+
+
+
+
+
+
   }
 }
 
