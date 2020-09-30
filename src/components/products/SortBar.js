@@ -2,9 +2,10 @@ import React, {useState} from 'react';
 import {sortProducts} from "../../actions";
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
+import TableIcon from "./TableIcon";
 
 const SortBar = ({everyPageShow,total,onChangeGridColum,colum,sortProducts}) => {
-    const [colums,setColum] = useState(colum)
+    const [colums,setColums] = useState(colum)
     const [order_price,setOrder_price]=useState(null);
 
     const changeOrderPrice = ()=>{
@@ -12,11 +13,10 @@ const SortBar = ({everyPageShow,total,onChangeGridColum,colum,sortProducts}) => 
         sortProducts("price",order_price);
     }
     const changeColum=(x)=>{
-        setColum(x)
+        setColums(x)
         onChangeGridColum(x)
     }
-    const unselected_3 = colums===2?' sortBar__gridIcon--unselected':'';
-    const unselected_2 = colums===3?' sortBar__gridIcon--unselected':'';
+
     return (
         <div className="sortBar flex_Row_SpaceBetween_Center">
             <div className="mediaSrc__FilterDiv">
@@ -46,14 +46,9 @@ const SortBar = ({everyPageShow,total,onChangeGridColum,colum,sortProducts}) => 
             </div>
             <div className="sortBar__right">
             Showing {everyPageShow} of {total} items
-            <div className="sortBar__setGrid">
-
-                <Link to="#" className="menuBtn" onClick={()=>{changeColum(3)}}>
-                    <i className={`fas fa-grip-horizontal sortBar__gridIcon--margin${unselected_3}`}></i>
-                </Link>
-                <Link to="#" className="menuBtn" onClick={()=>{changeColum(2)}}>
-                    <i className={`fas fa-th-large sortBar__gridIcon--margin${unselected_2}`}></i>
-                </Link>
+            <div className="sortBar__icon_group">
+                <TableIcon row="2" colum="3" onSelected={colums}  onClickHandle={changeColum}/>
+                <TableIcon row="2" colum="4" onSelected={colums}  onClickHandle={changeColum}/>
             </div>
             </div>
 
