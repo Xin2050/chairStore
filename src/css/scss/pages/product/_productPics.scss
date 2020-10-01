@@ -1,0 +1,65 @@
+.productPicFrame {
+  display: table;
+  width: 100%;
+
+
+  &__left {
+    display: table-cell;
+    vertical-align: top;
+    width: 10%;
+
+    &__side {
+      display: flex;
+      flex-direction: row;
+      justify-items: start;
+
+      &__imgbox {
+        margin: 0 1rem 1.8rem 0;
+
+
+        &--selected {
+          border: 2px solid blue;
+        }
+
+        &__img {
+          width: 100%;
+          overflow: hidden;
+        }
+      }
+      &__more{
+        background-color: black;
+        margin: 0 1rem 1.8rem 0;
+        font-size: 1rem;
+        padding: .5rem .3rem;
+        text-align: center;
+        color: white;
+      }
+    }
+
+
+
+  }
+
+  &__right {
+    display: table-cell;
+    width: 90%;
+    vertical-align: top;
+    &__main {
+      width: 100%;
+      padding: 0 0 1rem 1rem;
+      min-width: 40rem;
+      &__img {
+        width: 100%;
+        overflow: hidden;
+      }
+    }
+  }
+
+  &--fixed {
+    position: fixed;
+    top: 0;
+    //width: 60%;
+    background-color: white;
+  }
+
+}

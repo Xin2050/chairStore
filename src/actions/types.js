@@ -9,3 +9,6 @@ export const CART_DELETE='CART_DELETE';
 export const CART_UPDATE='CART_UPDATE';
 export const CART_CLEAR='CART_CLEAR';
 export const CART_CHECKOUT='CART_CHECKOUT';
+
+export const OPTIONS_INIT = 'OPTIONS_INIT';
+export const OPTIONS_CHANGE = 'OPTIONS_CHANGE';

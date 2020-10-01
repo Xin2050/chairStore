@@ -1,0 +1,105 @@
+.productInfo{
+
+  &__basicInfo{
+
+    &__name{
+      line-height: 1.2;
+      font-size:2.5rem;
+      font-weight: bold;
+    }
+    &__description{
+      color: $primary-text-color-gray;
+      font-size: 1.2rem;
+      hyphens: auto;
+      margin-top: 1.2rem;
+
+    }
+    &__price{
+      font-size:2rem;
+      //color: $primary-text-color-gray;
+      margin-top: 1.2rem;
+      letter-spacing: .1rem;
+    }
+    &__items{
+      margin-top: 2rem;
+
+      &__item{
+        margin-top:.5rem;
+        &__check{
+          font-size: 1.2rem;
+          color: red;
+        }
+        &__link{
+
+          &,&:visited{
+            color: $primary-text-color-gray;
+            font-size:1.6rem;
+            font-weight: bold;
+            text-decoration: none;
+            margin-left: 1rem;
+          }
+
+        }
+      }
+
+    }
+    &__freeshipping{
+      margin: 1.5rem 0;
+      color:$primary-button-color-red;
+      font-size: 1.5rem;
+    }
+  }
+
+
+}
+.productOptions{
+  width: 100%;
+  padding: 1rem 0;
+  &__title{
+    background-color: $primary-bg-color-gray-light;
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 0.7rem 1rem;
+    border-radius: 3px;
+  }
+  &__context{
+
+    &__base{
+
+      &__subname{
+        font-size: 1.4rem;
+        padding:1rem 0.2rem;
+        border-bottom: 2px solid $primary-border-color-gray-light;
+      }
+      &__imagelist{
+        margin: 1rem 0rem;
+
+        &__imgbox{
+          display: inline-block;
+          width: 5rem;
+          padding-right:1rem;
+
+
+          &__img{
+            width: 100%;
+            overflow: auto;
+            border: 2px solid white;
+
+            &:hover{
+              cursor:pointer;
+            }
+            &--selected{
+              outline: 2px solid cornflowerblue;
+            }
+          }
+        }
+      }
+    }
+    &__baseBtn{
+
+      &:hover{
+
+      }
+    }
+  }
+}

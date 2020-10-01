@@ -1,14 +1,20 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import {useLocation} from 'react-router';
+
 import $ from 'jquery';
 
 const CalgaryMenu = () => {
-
+    const url = useLocation().pathname;
     $(()=>{
+        if(url!=="/"){
+            return;
+        }
         let menuPosition = $(".calgaryMenu").offset().top;
 
         $(window).scroll(
             ()=>{
+
                 if($(document).scrollTop()>=menuPosition){
                     $(".calgaryMenu").addClass("calgaryMenu--fixed")
                 }else{

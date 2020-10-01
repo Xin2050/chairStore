@@ -11,47 +11,28 @@ import history from "../../base/history";
 
 
 class ProductsList extends React.Component {
-    state = { gridCols: 3 ,pop:null}
+    state = { gridCols: 3 }
 
 
     componentDidMount() {
         this.props.fetchProducts()
 
     }
-    showPopup = (id)=>{
-        const pop = <Popup id={id} onClose={this.onPopClose}/>
-        this.setState({pop});
-    }
-    onPopClose = ()=>{
-        this.setState({pop:null})
-    }
-    handelAddToCart = (id,price)=>{
-        const pc = document.getElementById(`product_${id}`)
-        pc.classList.add('productCard__animation-addToCart');
 
 
-        setTimeout(()=>{
-            this.props.addToCart(id,price);
-            pc.classList.remove('productCard__animation-addToCart')
-        },800)
-    }
     renderList() {
         return this.props.products.map(item => {
             return (
                 <div key={item.id} className="productCard" id={`product_${item.id}`}>
 
-                     <div className="product__Img" onClick={()=>{this.showPopup(item.id)}}>
+                     <div className="product__Img" onClick={()=>{
+                         history.push(`/detail/${item.id}`,{param1:1,param2:2})
+                     }}>
                             <img src={item.media.split('|')[0]} alt={item.slug} />
                             <img src={item.media.split('|')[1]} alt={item.slug} />
                     </div>
                     <div className="product__name">
                         {item.name}
-                        <button onClick={()=>{
-                            history.push(`/detail/${item.id}`,{param1:1,param2:2})
-                        }}>
-                            ...
-                        </button>
-
                     </div>
 
                     <div className="product__colors">
@@ -64,11 +45,11 @@ class ProductsList extends React.Component {
                     </div>
                     <div className="product__price">{NumberFormatted(item.price)}</div>
                     <div className="product__freeShipping">Free Shipping</div>
-                    <div className="product__addCartButtonDiv">
-                        <div onClick={()=>{this.handelAddToCart(item.id,item.price)}} className="product__addToCart">
-                            Add To Cart
-                        </div>
-                    </div>
+                    {/*<div className="product__addCartButtonDiv">*/}
+                    {/*    <div onClick={()=>{this.handelAddToCart(item.id,item.price)}} className="product__addToCart">*/}
+                    {/*        Add To Cart*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                 </div>
             )
         })
