@@ -58,7 +58,6 @@ const ProductBaseOption = ({productId,data,options,fetchOptions,optionsChange})=
                 <div className="productOptions__context">
                     <div className="productOptions__context__base__subname">
                         {profileItems[getIndexFromID(index)].name}
-                        (+{profileItems[getIndexFromID(index)].price})
                     </div>
                     <div className="productOptions__context__base__imagelist">
                         {renderList()}

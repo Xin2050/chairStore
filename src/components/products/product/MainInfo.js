@@ -2,6 +2,7 @@ import React from 'react';
 import {NumberFormatted} from "../../../apis/NumberFormat";
 import {Link} from "react-router-dom";
 import ProductBaseOption from "./ProductBaseOption";
+import ProductStanderOption from "./ProductStanderOptions";
 
 const MainInfo = ({data}) => {
     return (
@@ -35,6 +36,15 @@ const MainInfo = ({data}) => {
                 <div className="productInfo__basicInfo__freeshipping">Free Shipping</div>
             </div>
             <ProductBaseOption data={data.profileCategories[0]} productId={data.id}/>
+            <ProductStanderOption data={data.profileCategories} productId={data.id}/>
+            <div className="productInfo__last">
+                <div className="productInfo__last__no">Item No. FLC152SFH9898VPRBKSVPR84503</div>
+                <div className="productInfo__last__textbutton">
+                    <Link to='#' className="form__linkBtn">Save to Wishlist</Link>
+                    <Link to="#" className="form__linkBtn">Print</Link>
+                </div>
+
+            </div>
         </div>
     );
 };

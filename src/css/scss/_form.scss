@@ -266,6 +266,13 @@
     font-size: 1.3rem;
     line-height: 3;
   }
+  &__linkBtn{
+    &,&:visited{
+      font-size: 1.5rem;
+
+      color: $primary-text-color-gray;
+    }
+  }
 }
 
 input[type="date"]{

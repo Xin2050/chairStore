@@ -8,6 +8,7 @@ const CalgaryMenu = () => {
     const url = useLocation().pathname;
     $(()=>{
         if(url!=="/"){
+            $(window).off("scroll")
             return;
         }
         let menuPosition = $(".calgaryMenu").offset().top;
