@@ -1,32 +1,44 @@
 import _ from 'lodash'
-import {OPTIONS_CHANGE, OPTIONS_INIT} from "../actions/types";
+import {FETCH_OPTIONS, OPTIONS_CHANGE, OPTIONS_INIT} from "../actions/types";
 
 
-export default (state={},action)=>{
+export default (state = {}, action) => {
 
-    switch (action.type){
+    switch (action.type) {
+        case FETCH_OPTIONS:
+
+            return {...state};
         case OPTIONS_INIT:
             const newoptions = {...state};
-            if(_.findIndex(newoptions,{id:action.payload})===-1){
-                _.set(newoptions,[action.payload.id],
-                    {id:action.payload.id,
-                            price:+action.payload.price,
-                            options:{},
-                            optionsTotal:0,
-                            total:+action.payload.price
-                            })
+            if (_.findIndex(newoptions, {id: action.payload}) === -1) {
+                _.set(newoptions, [action.payload.id],
+                    {
+                        id: action.payload.id,
+                        price: +action.payload.price,
+                        options: {},
+                        optionsTotal: 0,
+                        total: +action.payload.price
+                    })
             }
             return newoptions;
         case OPTIONS_CHANGE:
-            return  _.chain(state)
+
+            const changedState = _.chain(state)
                 .cloneDeep()
-                .set([action.payload.id,'options',action.payload.optionsid],
+                .set([action.payload.productId, 'options', action.payload.categoryId],
                     {
-                        id:action.payload.optionsid,
-                        price:action.payload.price
+                        itemId: action.payload.optionId,
+                        price: action.payload.price
                     })
                 .value()
-            //return state;
+            const subtotal = _.reduce(Object.values(changedState[action.payload.productId].options),
+                (sum, item) => {
+                    return sum + Number(item.price)
+                }, 0)
+            changedState[action.payload.productId].optionsTotal = subtotal;
+            changedState[action.payload.productId].total =  changedState[action.payload.productId].price + subtotal;
+
+            return changedState;
 
         default:
             return state;

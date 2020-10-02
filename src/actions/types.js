@@ -12,3 +12,4 @@ export const CART_CHECKOUT='CART_CHECKOUT';
 
 export const OPTIONS_INIT = 'OPTIONS_INIT';
 export const OPTIONS_CHANGE = 'OPTIONS_CHANGE';
+export const FETCH_OPTIONS = 'FETCH_OPTIONS';

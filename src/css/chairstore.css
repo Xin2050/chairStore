@@ -1224,6 +1224,19 @@ select {
 .productOptions__context__base__imagelist__imgbox__img--selected {
   outline: 2px solid cornflowerblue;
 }
+.productOptions__context__base__btn {
+  margin-top: 1rem;
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  border: 1px solid #b8b8b8;
+  padding: 1rem 2rem;
+  border-radius: 4px;
+}
+.productOptions__context__base__btn:hover {
+  background-color: #efefef;
+}
+
 .productFrame {
   display: table;
   width: 100%;

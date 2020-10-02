@@ -94,12 +94,19 @@
           }
         }
       }
-    }
-    &__baseBtn{
-
-      &:hover{
-
+      &__btn{
+        margin-top: 1rem;
+        background-color: $button-color-white;
+        color: black;
+        font-weight: bold;
+        border: 1px solid $primary-border-color-gray;
+        padding: 1rem 2rem;
+        border-radius: 4px;
+        &:hover{
+          background-color: $primary-bg-color-gray-light;
+        }
       }
     }
+
   }
 }

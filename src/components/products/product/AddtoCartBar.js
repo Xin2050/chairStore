@@ -1,8 +1,15 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {NumberFormatted} from "../../../apis/NumberFormat";
 import {Link} from "react-router-dom";
+import {connect} from 'react-redux';
+import {fetchOptions} from "../../../actions";
 
-const AddtoCartBar = ({data}) => {
+const AddtoCartBar = ({data,fetchOptions,total}) => {
+    const loadOptions =()=>{
+      fetchOptions();
+    }
+    useEffect(loadOptions,[])
+
     const [q,setQ] = useState(1);
     return (
         <div className="addCartBar">
@@ -20,7 +27,7 @@ const AddtoCartBar = ({data}) => {
                     Ready to ship in 7 weeks
                 </div>
                 <div className="addCartBar__right__price">
-                    C{NumberFormatted(data.price)}
+                    C{NumberFormatted(total)}
                 </div>
                 <div className="addCartBar__right__quantity">
                     <input type="text" className="form__input addCartBar__right__quantity--only"
@@ -35,5 +42,10 @@ const AddtoCartBar = ({data}) => {
         </div>
     );
 };
+const mapStateToProps=(state,ownProps)=>{
 
-export default AddtoCartBar;
+ return {
+    total:state.options[ownProps.data.id].total
+ };
+}
+export default connect(mapStateToProps,{fetchOptions})(AddtoCartBar);

@@ -9,7 +9,8 @@ import {
     FETCH_PRODUCTS,
     SORT_PRODUCTS,
     OPTIONS_CHANGE,
-    OPTIONS_INIT
+    OPTIONS_INIT,
+    FETCH_OPTIONS
 } from "./types";
 
 import history from "../base/history";
@@ -19,8 +20,8 @@ export const optionsInit = (id,price)=>{
     return {type:OPTIONS_INIT,payload:{id,price}}
 }
 
-export const optionsChange = (id,optionsid,price)=>{
-    return {type:OPTIONS_CHANGE,payload:{id,optionsid,price}}
+export const optionsChange = (productId,categoryId,optionId,price)=>{
+    return {type:OPTIONS_CHANGE,payload:{productId,categoryId,optionId,price}}
 }
 
 
@@ -36,7 +37,9 @@ export const fetchProduct = (id) => async distpath => {
     const response = await Mark2Win.get(`/product/${id}`);
     distpath({type: FETCH_PRODUCT, payload: response.data});
 }
-
+export const fetchOptions = ()=>{
+    return {type:FETCH_OPTIONS};
+}
 
 export const fetchCartList = () => async distpath=>{
     let cart = __loadCart();
