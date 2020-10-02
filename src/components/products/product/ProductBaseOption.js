@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
+import {optionsChange} from "../../../actions";
+import {connect} from 'react-redux'
 import _ from 'lodash';
 
-const ProductBaseOption = ({data}) => {
+const ProductBaseOption = ({id,data,optionsChange}) => {
     const {profileItems} = data;
     let index = _.findIndex(profileItems, {"checked":true});
     if(index===-1){
@@ -18,6 +20,7 @@ const ProductBaseOption = ({data}) => {
                 <div key={`img_${index}`} className="productOptions__context__base__imagelist__imgbox"
                      onClick={()=>{
                          setSel(index);
+                         optionsChange(id,data.id,data.price);
                      }}
                 >
                 <img src={item.media} alt={item.name} key={index}
@@ -43,4 +46,4 @@ const ProductBaseOption = ({data}) => {
     );
 };
 
-export default ProductBaseOption;
+export default connect(null,{optionsChange})(ProductBaseOption);

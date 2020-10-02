@@ -34,7 +34,7 @@ const MainInfo = ({data}) => {
                 </div>
                 <div className="productInfo__basicInfo__freeshipping">Free Shipping</div>
             </div>
-            <ProductBaseOption data={data.profileCategories[0]}/>
+            <ProductBaseOption data={data.profileCategories[0]} id={data.id}/>
         </div>
     );
 };

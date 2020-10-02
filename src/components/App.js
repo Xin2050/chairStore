@@ -9,9 +9,9 @@ import {fetchCartList} from "../actions";
 import {connect} from "react-redux";
 import CartPage from "./cart/CartPage";
 import CheckoutPage from "./cart/CheckoutPage";
-import Index from "./products/product/Index";
 import ViewOrderPage from "./cart/ViewOrderPage";
 import EditOrderPage from "./cart/EditOrderPage";
+import ProductDetails from "./products/product/ProductDetails";
 
 
 class App extends React.Component{
@@ -28,7 +28,7 @@ class App extends React.Component{
                     <Switch>
                         <Route path="/" exact
                                render={()=><ProductsList updateCounter={this.updateCartCounter} />}/>
-                        <Route path="/detail/:id" exact component={Index}/>
+                        <Route path="/detail/:id" exact component={ProductDetails}/>
                         <Route path="/cart" exact component={CartPage}/>
                         <Route path="/cart/checkout" exact component={CheckoutPage}/>
                         <Route path="/cart/vieworder" exact component={ViewOrderPage}/>

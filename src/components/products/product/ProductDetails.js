@@ -13,7 +13,7 @@ import Specification from "./Specification";
 import AddtoCartBar from "./AddtoCartBar";
 
 
-class Index extends React.Component {
+class ProductDetails extends React.Component {
     id = this.props.match.params.id
 
     componentDidMount() {
@@ -57,4 +57,4 @@ const mapStateToProps = (state,ownProps) => {
         data: state.products[ownProps.match.params.id]
     };
 }
-export default connect(mapStateToProps, {fetchProduct,optionsInit})(Index);
+export default connect(mapStateToProps, {fetchProduct,optionsInit})(ProductDetails);
