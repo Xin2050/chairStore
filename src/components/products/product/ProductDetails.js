@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {fetchProduct,optionsInit} from "../../../actions";
+import {fetchProductThenInitOptions} from "../../../actions";
 import {connect} from 'react-redux'
 import NavBar from "../NavBar";
 import MainPictures from "./MainPictures";
@@ -16,17 +16,23 @@ import AddtoCartBar from "./AddtoCartBar";
 class ProductDetails extends React.Component {
     id = this.props.match.params.id
 
+
     componentDidMount() {
-        this.props.fetchProduct(this.id);
+        //console.log(this.props.match);
+        this.props.fetchProductThenInitOptions(this.id);
+        //not do this may be
 
     }
 
+
+
     render() {
-        const data = this.props.data;
-        if (!data) {
+
+        if (!this.props.data) {
             return "Loading...";
         }
-        this.props.optionsInit(this.id,data.price);
+        const data = this.props.data;
+
         return (
 
             <div className="mainContext">
@@ -54,7 +60,10 @@ class ProductDetails extends React.Component {
 };
 const mapStateToProps = (state,ownProps) => {
     return {
-        data: state.products[ownProps.match.params.id]
+        data: state.products[ownProps.match.params.id],
+        options:state.options
     };
 }
-export default connect(mapStateToProps, {fetchProduct,optionsInit})(ProductDetails);
+export default connect(mapStateToProps, {
+    fetchProductThenInitOptions
+})(ProductDetails);

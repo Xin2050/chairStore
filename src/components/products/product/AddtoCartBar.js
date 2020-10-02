@@ -43,7 +43,9 @@ const AddtoCartBar = ({data,fetchOptions,total}) => {
     );
 };
 const mapStateToProps=(state,ownProps)=>{
-
+    if(!state.options[ownProps.data.id]){
+        return {total:"loading..."}
+    }
  return {
     total:state.options[ownProps.data.id].total
  };

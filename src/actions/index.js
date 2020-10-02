@@ -15,13 +15,23 @@ import {
 
 import history from "../base/history";
 
+export const fetchProductThenInitOptions=(id)=> async distpatch=>{
 
-export const optionsInit = (id,price)=>{
-    return {type:OPTIONS_INIT,payload:{id,price}}
+    const response = await fetchOneProduct(id);
+    distpatch({type: FETCH_PRODUCT, payload: response.data});
+    distpatch({type:OPTIONS_INIT,payload:{
+            id:response.data.data.id,
+            price:response.data.data.price,
+            profileCategories:response.data.data.profileCategories
+    }});
 }
 
-export const optionsChange = (productId,categoryId,optionId,price)=>{
-    return {type:OPTIONS_CHANGE,payload:{productId,categoryId,optionId,price}}
+
+
+
+export const optionsChange = (productId,categoryId,option)=>{
+    const {id,price} = option;
+    return {type:OPTIONS_CHANGE,payload:{productId,categoryId,itemId:id,price}}
 }
 
 
@@ -33,8 +43,15 @@ export const sortProducts = (which, how)=>{
     return {type:SORT_PRODUCTS, payload:{which,how}}
 }
 
-export const fetchProduct = (id) => async distpath => {
+const fetchOneProduct= async(id)=>{
     const response = await Mark2Win.get(`/product/${id}`);
+
+    return response;
+}
+
+export const fetchProduct = (id) => async distpath => {
+
+    const response = await fetchOneProduct(id)
     distpath({type: FETCH_PRODUCT, payload: response.data});
 }
 export const fetchOptions = ()=>{

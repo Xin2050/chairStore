@@ -5,7 +5,7 @@ import NavBar from "./NavBar";
 import MainContextH1 from "./MainContextH1";
 import SortBar from "./SortBar";
 import { NumberFormatted } from "../../apis/NumberFormat";
-import Popup from "../Popup";
+//import Popup from "../Popup";
 import _ from 'lodash';
 import history from "../../base/history";
 
@@ -18,7 +18,9 @@ class ProductsList extends React.Component {
         this.props.fetchProducts()
 
     }
-
+    handleOpen = (id)=>{
+        history.push(`/detail/${id}`)
+    }
 
     renderList() {
         return this.props.products.map(item => {
@@ -26,7 +28,7 @@ class ProductsList extends React.Component {
                 <div key={item.id} className="productCard" id={`product_${item.id}`}>
 
                      <div className="product__Img" onClick={()=>{
-                         history.push(`/detail/${item.id}`,{param1:1,param2:2})
+                         this.handleOpen(item.id);
                      }}>
                             <img src={item.media.split('|')[0]} alt={item.slug} />
                             <img src={item.media.split('|')[1]} alt={item.slug} />

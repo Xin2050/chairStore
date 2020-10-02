@@ -1,7 +1,35 @@
 import _ from 'lodash'
 import {FETCH_OPTIONS, OPTIONS_CHANGE, OPTIONS_INIT} from "../actions/types";
 
+const _loadInitOptions = (items)=>{
+    const options = {};
+    items.forEach(item=>{
+        let system_default = _.findIndex(item.profileItems, {"checked": true});
+        if (-1===system_default){
+            system_default = 0;
+        }
+        options[item.id]= _createOption(item,system_default)
+    })
 
+    return options;
+}
+const _calTotal = (state,productId)=>{
+    const subtotal = _.reduce(Object.values(state[productId].options),
+        (sum, item) => {
+            return sum + Number(item.price)
+        }, 0)
+
+    state[productId].optionsTotal = subtotal;
+    state[productId].total =  state[productId].price + subtotal;
+    //return state;
+}
+const _createOption = (item,index)=>{
+    return {
+        categoryId:item.id,
+        itemId: item.profileItems[index].id,
+        price:item.profileItems[index].price
+    }
+}
 export default (state = {}, action) => {
 
     switch (action.type) {
@@ -15,11 +43,13 @@ export default (state = {}, action) => {
                     {
                         id: action.payload.id,
                         price: +action.payload.price,
-                        options: {},
+                        options: _loadInitOptions(action.payload.profileCategories), //load all default options
                         optionsTotal: 0,
                         total: +action.payload.price
                     })
             }
+            _calTotal(newoptions,action.payload.id);
+
             return newoptions;
         case OPTIONS_CHANGE:
 
@@ -27,17 +57,12 @@ export default (state = {}, action) => {
                 .cloneDeep()
                 .set([action.payload.productId, 'options', action.payload.categoryId],
                     {
-                        itemId: action.payload.optionId,
+                        categoryId:action.payload.categoryId,
+                        itemId: action.payload.itemId,
                         price: action.payload.price
                     })
                 .value()
-            const subtotal = _.reduce(Object.values(changedState[action.payload.productId].options),
-                (sum, item) => {
-                    return sum + Number(item.price)
-                }, 0)
-            changedState[action.payload.productId].optionsTotal = subtotal;
-            changedState[action.payload.productId].total =  changedState[action.payload.productId].price + subtotal;
-
+            _calTotal(changedState,action.payload.productId);
             return changedState;
 
         default:
