@@ -1,0 +1,118 @@
+.spe{
+  width: 100%;
+  padding: 3rem 2rem;
+  background-color: $primary-bg-color-gray-light;
+  &__name{
+    display: inline-block;
+    font-size: 1.6rem;
+    color: $primary-text-color-gray;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+  }
+  & h3{
+    font-size: 3rem;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+  }
+  & img{
+    display: block;
+    margin: 0 auto;
+  }
+  &__content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &__left{
+      width: 35%;
+      &__items{
+
+
+        &__item{
+          font-size: 1.3rem;
+          color: black;
+          padding: 0 2rem;
+          border-bottom: 1px solid $primary-border-color-gray;
+          &__title{
+            padding: 2rem 0;
+            font-weight: bold;
+
+            position: relative;
+            &::after{
+              content: "";
+              position: absolute;
+              top: 26%;
+              left: 96%;
+              display: inline-block;
+              border-top: 2px solid;
+              border-right: 2px solid;
+              width: 0.8rem;
+              height: .8rem;
+              border-color: rgba(90, 90, 90, 0.5);
+              transform: rotate(135deg);
+              margin: 1rem auto auto 1rem;
+              transition: all .3s;
+            }
+            &--select{
+              &::after{
+                transform: rotate(315deg);
+              }
+            }
+          }
+
+          &__details{
+            display: none;
+            margin-bottom: 1rem;
+            &--show{
+              display: block;
+            }
+            & h4{
+              margin-top: 2rem;
+            }
+            & p{
+
+              &:not(:first-child){
+                margin-top:2rem;
+              }
+            }
+          }
+
+        }
+      }
+    }
+    &__right{
+      width: 65%;
+      padding: 2rem 2rem;
+      & table{
+        margin-left: 2rem;
+        width: 100%;
+        border-collapse: collapse;
+        & thead tr{
+          height: 6rem;
+          font-weight: bold;
+          font-size: 1.5rem;
+          border-bottom: 3px solid black;
+          & td{
+            padding-left: 1rem;
+          }
+        }
+        & tbody tr{
+          height: 6rem;
+          font-size: 1.5rem;
+          & td{
+            &:first-child{
+              font-weight: bold;
+            }
+            padding-left: 1rem;
+            border-bottom: 1px solid $primary-border-color-gray-light;
+            &:not(:last-child){
+              border-right: 1px solid $primary-border-color-gray-light;
+            }
+          }
+        }
+      }
+    }
+  }
+}

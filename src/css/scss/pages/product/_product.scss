@@ -1,7 +1,14 @@
 @import "addcartbar";
 @import "productPics";
 @import "product_info";
+@import "productDescription";
+@import "specification";
 
+.productDescOutSideBox{
+  margin: 2rem 0 0 0;
+  width: 100%;
+  padding: 0 2rem;
+}
 .productFrame{
   display: table;
   width: 100%;
@@ -11,10 +18,80 @@
     width: 65%;
     vertical-align: top;
   }
+  &__sitdown{
+    vertical-align: bottom;
+
+    & div div{
+      vertical-align: bottom;
+    }
+  }
   &__right{
     vertical-align: top;
     display: table-cell;
     width:35%;
     padding-left: 2rem;
+  }
+}
+
+.ad1{
+  width: 100%;
+  position: relative;
+  background-color: white;
+  margin-top: -2rem;
+
+  & img{
+
+    width: 100%;
+    //transform: translateX(20%);
+  }
+  & div{
+
+    position: absolute;
+    top:10%;
+    left:0;
+    margin-left: 3rem;
+    & h2{
+      font-size: 5.5rem;
+      width: 32%;
+      line-height: 1.2;
+
+    }
+    & p{
+      margin-top: 1rem;
+      font-size:2.4rem;
+      width: 35%;
+      line-height: 1.3;
+    }
+  }
+}
+.ad2{
+  width: 100%;
+  position: relative;
+  background-color: white;
+  margin-top: -2rem;
+
+  & img{
+    width: 100%;
+    //transform: translateX(20%);
+  }
+
+  & div{
+    position: absolute;
+    top:10%;
+    left:60%;
+    margin-right: 3rem;
+    color: $primary-text-color-white;
+    & h2{
+      font-size: 5rem;
+      width: 100%;
+      line-height: 1.2;
+    }
+    & p{
+      margin-top: 1rem;
+      font-size:2.4rem;
+
+      width: 100%;
+      line-height: 1.3;
+    }
   }
 }

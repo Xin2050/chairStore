@@ -147,3 +147,53 @@
 
   }
 }
+.infoOptions{
+  &__radiogroup{
+
+  }
+  &__radio-input{
+    display: none;
+  }
+  &__radio-label{
+    cursor: pointer;
+    position:relative;
+    padding-left: 3.5rem; //fix position
+  }
+  &__radio-button{
+    height:2.2rem;
+    width:2.2rem;
+    border:3px solid rgba(223, 223, 223, .8);
+    border-radius:50%;
+    display: inline-block;
+    position: absolute;
+    left:0;
+    top:-.4rem;
+    &::after{
+      content:"";
+      display: block;
+      height: 2.2rem;
+      width: 2.2rem;
+      border-radius: 50%;
+      @include absCenter;
+      background-color: $primary-button-color-blue;
+      opacity: 0;
+      transition: opacity .2s;
+    }
+    &::before{
+      content:"";
+      position: absolute;
+      top:16%;
+      left:34%;
+      display: inline-block;
+      border-bottom: 2px solid $primary-bg-color-white;
+      border-right: 2px solid $primary-bg-color-white;
+      width: .5rem;
+      height: 1rem;
+      z-index: 2;
+      transform: rotate(28deg);
+    }
+  }
+  &__radio-input:checked ~ &__radio-button::after{
+    opacity:1;
+  }
+}

@@ -4,26 +4,39 @@ import $ from "jquery";
 const MainPictures = ({media,id}) => {
 
     const [currentPic,setCurrentPic] = useState(media[0])
+    const [max,setMax] = useState(5);
     $(()=>{
-        let Position = $(".productPicFrame").offset().top;
+        const picBox = $(".productPicFrame");
+        const topBorder = picBox.offset().top;
+        const bottomBorder  = $(".productFrame").height()+$(".productFrame").offset().top;
+
+        //console.log(bottomBorder);
 
         $(window).scroll(
             ()=>{
-                let w = $(".productPicFrame").width();
-                //todo check w almost equals to windows width, then disabled function
-                if($(document).scrollTop()>=Position){
-                    $(".productPicFrame").addClass("productPicFrame--fixed").width(w)
+                let w = picBox.width();
+                let h = $(".productPicFrame__right__main").height();
+                let changeLine = bottomBorder - h;
+                //console.log($(document).scrollTop(),changeLine);
+
+                if($(document).scrollTop()>=topBorder){
+                    picBox.addClass("productPicFrame--fixed").width(w)
+                    $(".productFrame__left").removeClass("productFrame__sitdown")
+                    if($(document).scrollTop()>=changeLine){
+                        picBox.removeClass("productPicFrame--fixed");
+                        $(".productFrame__left").addClass("productFrame__sitdown")
+                    }
                 }else{
-                    $(".productPicFrame").removeClass("productPicFrame--fixed").removeAttr("style")
+                    picBox.removeClass("productPicFrame--fixed").removeAttr("style")
+                    $(".productFrame__left").removeClass("productFrame__sitdown")
                 }
             }
         )
     })
     const renderImgList=()=>{
         const total = media.length;
-        const onlyshow = 5;
         const rendedList = [];
-        for(let i=0;i<5;i++){
+        for(let i=0;i<max;i++){
             if(media[i]){
                 let css = "";
                 if(currentPic===media[i]){
@@ -41,10 +54,12 @@ const MainPictures = ({media,id}) => {
                 )
             }
         }
-        if((total-onlyshow)>0){
+        if ((total!==max)&&((total-max)>0)){
             rendedList.push(
-                <div key="more" className="productPicFrame__left__side__more" onClick={onClickHandle}>
-                    +{total-onlyshow} MORE
+                <div key="more" className="productPicFrame__left__side__more" onClick={()=>{
+                    setMax(media.length);
+                }}>
+                    +{total-max} MORE
                 </div>
             )
         }
