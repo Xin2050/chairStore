@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
 import $ from "jquery";
+import Popup from "../Popup";
+
 
 const MainPictures = ({media,id}) => {
 
     const [currentPic,setCurrentPic] = useState(media[0])
-    const [max,setMax] = useState(5);
+    const max = 5;
+    const [popup,setPopup]  = useState(null);
     $(()=>{
         const picBox = $(".productPicFrame");
         const topBorder = picBox.offset().top;
@@ -56,20 +59,24 @@ const MainPictures = ({media,id}) => {
         }
         if ((total!==max)&&((total-max)>0)){
             rendedList.push(
-                <div key="more" className="productPicFrame__left__side__more" onClick={()=>{
-                    setMax(media.length);
-                }}>
+                <div key="more" className="productPicFrame__left__side__more" onClick={openPopup}>
                     +{total-max} MORE
+
                 </div>
             )
         }
         return rendedList;
     }
-    const onClickHandle = ()=>{
-        console.log(id);
-        //todo open popup window for show pictures
+    const openPopup =()=>{
+        setPopup(<Popup id={id} onClose={closePopup} />)
+    }
+    const closePopup =(e)=>{
+
+        setPopup(null);
+        e.stopPropagation();
     }
     return (
+        <>
         <div className="productPicFrame">
             <div className="productPicFrame__left">
                 {renderImgList()}
@@ -78,8 +85,21 @@ const MainPictures = ({media,id}) => {
                 <div className="productPicFrame__right__main">
                     <img src={currentPic} alt="" className="productPicFrame__right__main__img"/>
                 </div>
+                <div className="productPicFrame__right__main__dimensions" onClick={()=>{
+                    const top = $(".spe").offset().top;
+                    for(let i=1;i<=100;i++){
+                        setTimeout(()=>{
+                            $(window).scrollTop(top/100*i);
+                        },i*10)
+                    }
+
+                }}>
+                    <i className="fas fa-cubes"/> Dimensions
+                </div>
             </div>
         </div>
+        {popup}
+        </>
     );
 };
 

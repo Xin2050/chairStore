@@ -4,7 +4,7 @@ import $ from 'jquery';
 const FeaturedImages = ({media}) => {
     const [max,setMax] =useState(2);
     const fixpics = ()=>{
-        let fixedHight  =0;
+        //let fixedHight  =0;
         let fixedWidth = 0;
         $(".FeaturedImages__grid__imgbox").each((index,item)=>{
 

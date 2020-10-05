@@ -976,64 +976,110 @@ select {
 .popup__disable {
   transform: scale(0);
 }
-.popup__content {
+.popup__left {
   position: absolute;
-  width: 80%;
-  left: 50%;
-  top: 50%;
-  background-color: #f3f3f3;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  width: 25%;
+  height: 110%;
+  overflow: scroll;
 }
-.popup__content__close {
+.popup__left__content {
+  padding: 2rem 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  grid-column-gap: 1rem;
+  grid-row-gap: 2rem;
+}
+.popup__left__content__imageBox {
+  width: 85%;
+  overflow: hidden;
+}
+.popup__left__content__imageBox__img {
+  width: 100%;
+}
+.popup__left__content__imageBox--selected {
+  border: 3px solid transparent;
+  outline: 2px solid white;
+}
+.popup__right {
+  position: absolute;
+  top: 0;
+  left: 25%;
+  width: 75%;
+  height: 100%;
+}
+.popup__right__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75%;
+  height: 80%;
+  background-color: #f3f3f3;
+}
+.popup__right__content__name {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.5rem;
+  font-weight: bold;
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.popup__right__content__page {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.5rem;
+  font-weight: bold;
+  position: absolute;
+  top: 92%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.popup__right__content__close {
   position: absolute;
   font-size: 4rem;
   width: 2rem;
   height: 2rem;
   right: 2rem;
   top: 1.1rem;
-  z-index: 9999;
+  z-index: 20;
   text-decoration: none;
-  color: black;
+  color: white;
   transition: all 0.2s ease;
   line-height: 1;
 }
-.popup__content__close:hover {
+.popup__right__content__close:hover {
   transform: scale(1.2);
   cursor: pointer;
 }
-.popup__content_GoBtn {
+.popup__right__content_GoBtn {
   position: absolute;
   font-size: 8rem;
   top: 50%;
   transform: translateY(-50%);
-  color: rgba(128, 128, 128, 0.2);
+  color: rgba(128, 128, 128, 0.6);
   cursor: pointer;
   transition: all 0.3s;
 }
-.popup__content_GoBtn--left {
-  left: 2rem;
+.popup__right__content_GoBtn--left {
+  left: -7rem;
 }
-.popup__content_GoBtn--right {
-  right: 2rem;
+.popup__right__content_GoBtn--right {
+  right: -7rem;
 }
-.popup__content_GoBtn:hover {
+.popup__right__content_GoBtn:hover {
   transform: translateY(-50%) scale(1.2);
 }
-.popup__content__imgList {
+.popup__right__content__imgBox__imgList {
+  display: flex;
+  flex-direction: row;
   overflow: hidden;
 }
-.popup__content__img {
+.popup__right__content__img {
+  object-fit: contain;
   width: 100%;
-  border-radius: 3px;
-}
-.popup__content__img:not(:first-child) {
-  display: none;
-}
-.popup__content__img--show {
-  display: block;
-}
-.popup__content__img--hide {
-  display: block;
+  transition: all 0.4s;
 }
 
 .addCartBar {
@@ -1147,6 +1193,16 @@ select {
 .productPicFrame__right__main__img {
   width: 100%;
   overflow: hidden;
+}
+.productPicFrame__right__main__dimensions {
+  color: #5d5d5d;
+  font-size: 1.4rem;
+  letter-spacing: 0.1rem;
+  line-height: 1;
+  text-align: center;
+}
+.productPicFrame__right__main__dimensions i {
+  font-size: 1.6rem;
 }
 .productPicFrame--fixed {
   position: fixed;
@@ -1291,6 +1347,7 @@ select {
   position: absolute;
   left: 0;
   top: -0.4rem;
+  z-index: -2;
 }
 .infoOptions__radio-button::after {
   content: "";
@@ -1305,6 +1362,7 @@ select {
   background-color: #449bef;
   opacity: 0;
   transition: opacity 0.2s;
+  z-index: -2;
 }
 .infoOptions__radio-button::before {
   content: "";
@@ -1316,7 +1374,7 @@ select {
   border-right: 2px solid #fafafa;
   width: 0.5rem;
   height: 1rem;
-  z-index: 2;
+  z-index: -1;
   transform: rotate(28deg);
 }
 .infoOptions__radio-input:checked ~ .infoOptions__radio-button::after {

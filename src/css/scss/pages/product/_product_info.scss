@@ -158,6 +158,7 @@
     cursor: pointer;
     position:relative;
     padding-left: 3.5rem; //fix position
+
   }
   &__radio-button{
     height:2.2rem;
@@ -168,6 +169,7 @@
     position: absolute;
     left:0;
     top:-.4rem;
+    z-index: -2;
     &::after{
       content:"";
       display: block;
@@ -178,6 +180,7 @@
       background-color: $primary-button-color-blue;
       opacity: 0;
       transition: opacity .2s;
+      z-index: -2;
     }
     &::before{
       content:"";
@@ -189,7 +192,7 @@
       border-right: 2px solid $primary-bg-color-white;
       width: .5rem;
       height: 1rem;
-      z-index: 2;
+      z-index: -1;
       transform: rotate(28deg);
     }
   }

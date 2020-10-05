@@ -52,6 +52,18 @@
         width: 100%;
         overflow: hidden;
       }
+
+      &__dimensions{
+        color: $primary-text-color-gray;
+        font-size: 1.4rem;
+        letter-spacing: .1rem;
+        line-height: 1;
+        text-align: center;
+        & i{
+          font-size: 1.6rem;
+
+        }
+      }
     }
   }
 
