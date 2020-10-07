@@ -1,24 +1,100 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
-import {fetchCartList} from "../../actions";
+import {fetchCartListAndProducts} from "../../actions";
 import {connect} from 'react-redux'
+import FixedCartLayer from "../cart/FixedCartLayer";
 
-class HeadMenu extends React.Component {
-    componentDidMount() {
-        this.props.fetchCartList();
+const HeadMenu = (props) => {
+
+    const [isFirst, setIsFirst] = useState(true);
+    const [fixedCart, setFixedCart] = useState(null);
+    const [isClose, setIsClose] = useState(false);
+    const [isShow,setIsShow] = useState(false);
+    const [debouncedShow,setDebouncedShow] = useState(false);
+
+
+
+
+
+    const keepShow=()=>{
+
+        setIsClose(false);
+    }
+    const prepareClosing = ()=>{
+
+        setIsClose(true);
     }
 
-    getCartCounter = () => {
-        if (!this.props.counter) {
+    const componentDidMount = () => {
+        props.fetchCartListAndProducts();
+    }
+
+
+    const showFixedCart = (delay=0) => {
+
+        if(window.location.pathname==="/cart"){
+            return;
+        }
+        if (props.counter === "loading...") {
+            return;
+        }
+        if ((props.counter >= 0) && (!isFirst)) {
+            setTimeout(()=>{
+                setFixedCart(<FixedCartLayer onMouseHover={keepShow} onMouseLeave={prepareClosing}/>);
+            },delay);
+            //setIsClose(true);
+            setIsShow(false);
+            setDebouncedShow(false);
+        } else {
+            setIsFirst(false);
+        }
+    }
+    const closeFixedCart = () => {
+        if (!isClose) {
+            return;
+        }
+        const timeid = setTimeout(() => {
+            setFixedCart(null);
+            setIsClose(false);
+
+        }, 500)
+        return () => {
+            clearTimeout(timeid);
+        }
+    }
+    const prepareShow=()=>{
+        if(window.location.pathname==="/cart"){
+            return;
+        }
+        if(!debouncedShow){
+            return;
+        }
+        const timeid = setTimeout(()=>{
+            setIsShow(true);
+        },500);
+        return ()=>{
+            clearTimeout(timeid);
+        }
+
+    }
+    useEffect(componentDidMount, []);
+    useEffect(showFixedCart, [props.counter]);
+    useEffect(prepareShow,[debouncedShow]);
+    useEffect(closeFixedCart, [isClose]);
+    useEffect(showFixedCart,[isShow]);
+
+    const getCartCounter = () => {
+        if (!props.counter) {
             return null;
         } else {
 
-            return <span className="cart__counter">({this.props.counter})</span>
+            return <span className="cart__counter">({props.counter})</span>
         }
     }
 
-    render() {
-        return (
+
+    return (
+        <>
             <div className="headMenu">
                 <div className="headMenu__Items">
                     <div className="headMenu__Item headMenu__Btn--Selected">
@@ -35,29 +111,38 @@ class HeadMenu extends React.Component {
                 <div className="headMenu__functions">
                     <div className="headMenu__function">
                         <Link to="" className="menuBtn headMenu__Item--middle headMenu__function--color--gray">
-                            My Account <i className="fas fa-user headMenu__function_icon"></i>
+                            My Account <i className="fas fa-user headMenu__function_icon"/>
                         </Link>
                     </div>
                     <div className="headMenu__function">
-                        <Link to="/cart" className="menuBtn headMenu__Item--middle headMenu__function--color--gray">
-                            Cart <i className="fas fa-shopping-cart headMenu__function_icon"></i>
-                            {this.getCartCounter()}
+                        <Link to="/cart"
+                              className="menuBtn headMenu__Item--middle headMenu__function--color--gray"
+                              onMouseLeave={()=>{
+                                  setDebouncedShow(false);
+                                  prepareClosing();
+                              }}
+                              onMouseEnter={() => {
+                                  setDebouncedShow(true);
+                                  keepShow();
+                              }}>
+                            Cart <i className="fas fa-shopping-cart headMenu__function_icon"/>
+                            {getCartCounter()}
                         </Link>
                     </div>
-
-
                 </div>
+
             </div>
-        );
-    }
+            {fixedCart}
+        </>
+    );
+
 };
 const mapStateToProps = (state) => {
 
     if (!state.cart.data) {
         return {counter: "loading..."};
     }
-    return {
-        counter: Object.values(state.cart.data).reduce((total, item) => total + item.quantity, 0)
-    };
+    const counter = Object.values(state.cart.data).reduce((total, item) => total + item.quantity, 0)
+    return {counter};
 }
-export default connect(mapStateToProps, {fetchCartList})(HeadMenu);
+export default connect(mapStateToProps, {fetchCartListAndProducts})(HeadMenu);

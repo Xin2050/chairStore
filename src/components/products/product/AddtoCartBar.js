@@ -1,15 +1,49 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {NumberFormatted} from "../../../apis/NumberFormat";
-import {Link} from "react-router-dom";
-import {connect} from 'react-redux';
-import {fetchOptions} from "../../../actions";
 
-const AddtoCartBar = ({data,fetchOptions,total}) => {
+import {connect} from 'react-redux';
+import {fetchOptions,addToCart} from "../../../actions";
+import $ from "jquery";
+
+
+
+
+const AddtoCartBar = ({data,fetchOptions,addToCart,total}) => {
+    const [buttonText,setButtonText] = useState("Add To Cart");
+    const btnref = useRef();
+
     const loadOptions =()=>{
       fetchOptions();
     }
     useEffect(loadOptions,[])
 
+    const handleOnClick=()=>{
+
+        new Promise((resolve)=>{
+            setButtonText("Adding...");
+            btnref.current.disabled = true;
+            resolve(addToCart(data));
+        }).then(
+            (resolve)=>{
+                setTimeout(()=>{
+                    setButtonText("Add To Cart")
+                    btnref.current.disabled = false;
+                },1000)
+            }
+        )
+        const top = $(".headMenu").offset().top;
+
+        const currentTop = $(window).scrollTop();
+
+
+        for(let i=10;i>-1;i--){
+            setTimeout(()=>{
+
+                $(window).scrollTop((currentTop-top)/10*i);
+            },(10-i)*10)
+        }
+
+    }
     const [q,setQ] = useState(1);
     return (
         <div className="addCartBar">
@@ -27,27 +61,29 @@ const AddtoCartBar = ({data,fetchOptions,total}) => {
                     Ready to ship in 7 weeks
                 </div>
                 <div className="addCartBar__right__price">
-                    C{NumberFormatted(total)}
+                    C{NumberFormatted(data.total)}
                 </div>
                 <div className="addCartBar__right__quantity">
                     <input type="text" className="form__input addCartBar__right__quantity--only"
                            value={q} onChange={e=>{setQ(e.target.value)}}/>
                 </div>
                 <div className="addCartBar__BtnBox">
-                    <Link to="#" className="form__PrimaryBtn ">
-                        Add To Cart
-                    </Link>
+                    <button ref={btnref} className="form__PrimaryBtn " onClick={handleOnClick} >
+                        {buttonText}
+                    </button>
                 </div>
             </div>
         </div>
-    );
+    )
+
+
 };
 const mapStateToProps=(state,ownProps)=>{
     if(!state.options[ownProps.data.id]){
         return {total:"loading..."}
     }
  return {
-    total:state.options[ownProps.data.id].total
+        data:state.options[ownProps.data.id]
  };
 }
-export default connect(mapStateToProps,{fetchOptions})(AddtoCartBar);
+export default connect(mapStateToProps,{fetchOptions,addToCart})(AddtoCartBar);

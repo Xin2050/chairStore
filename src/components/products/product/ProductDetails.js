@@ -11,7 +11,8 @@ import ProductAd1 from "./ProductAD1";
 import ProductAd2 from "./ProductAD2";
 import Specification from "./Specification";
 import AddtoCartBar from "./AddtoCartBar";
-
+import Spinner from "../../Spinner";
+import _ from 'lodash';
 
 class ProductDetails extends React.Component {
     id = this.props.match.params.id
@@ -23,8 +24,13 @@ class ProductDetails extends React.Component {
     render() {
 
         if (!this.props.data) {
-            return "Loading...";
+            return <Spinner message="Loading..."/>
         }
+        if(this.props.data.error){
+            return <Spinner message={this.props.data.error} is404/>
+        }
+
+
         const data = this.props.data;
 
         return (
@@ -55,6 +61,12 @@ class ProductDetails extends React.Component {
 
 };
 const mapStateToProps = (state, ownProps) => {
+    if(_.isEmpty(state.products)){
+        return {}
+    }
+    if(state.products.error){
+       return {data:state.products};
+    }
     return {
         data: state.products[ownProps.match.params.id],
         options: state.options

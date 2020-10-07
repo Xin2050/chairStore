@@ -1,16 +1,19 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
-import {fetchCartList, fetchProducts, editQuantity} from "../../actions";
+import {fetchCartListAndProducts, editQuantity, deleteFromCart} from "../../actions";
 
 import {NumberFormatted} from "../../apis/NumberFormat";
-import Item from "./Item";
+import Spinner from "../Spinner";
+import _ from 'lodash';
+import FixedCartImage from "./FixedCartImage";
+import FixedCartNameAndOptions from "./FixedCartNameAndOptions";
+import {Link} from "react-router-dom";
 
+class Cart extends React.Component {
 
-class Cart extends Component {
 
     componentDidMount() {
-        this.props.fetchProducts();
-        //this.props.fetchCartList();
+        this.props.fetchCartListAndProducts();
     }
 
     renderTableHead() {
@@ -40,12 +43,10 @@ class Cart extends Component {
     }
 
     renderTableFooter() {
-        const subtotal = this.props.cart.reduce((total, item) => {
-            return total + (item.quantity * Number(item.price))
-        }, 0);
-        const gst = subtotal * 0.18;
+
+        const gst = this.props.subtotal * 0.18;
         const delivery = 22;
-        const total = subtotal + delivery + gst;
+        const total = this.props.subtotal + delivery + gst;
         return (
             <div className="cart__table__footer">
                 <div className="cart__table__footer__left">
@@ -67,7 +68,7 @@ class Cart extends Component {
                         <tbody>
                         <tr>
                             <td>Subtotal:</td>
-                            <td>{NumberFormatted(subtotal)}</td>
+                            <td>{NumberFormatted(this.props.subtotal)}</td>
                         </tr>
                         <tr>
                             <td>Estimated Tax:</td>
@@ -90,27 +91,48 @@ class Cart extends Component {
         )
     }
 
-    getItem(id) {
-        if (this.props.products[id]) {
-            if(this.props.readonly){
-                return <Item product={this.props.products[id]} readonly/>
-            }else{
-                return <Item product={this.props.products[id]} />
-            }
-
-        } else {
-            return "Loading..."
-        }
+    onDelete = (index) => {
+        this.props.deleteFromCart(index)
     }
 
-    handleChange = (id, val) => {
+    getItem(id,index,options) {
 
-        this.props.editQuantity(id,val);
-        const text = document.getElementById(`q_${id}`)
+
+        return (
+            <div className="cart__table__body__col__item">
+                <div className="cart__table__body__col__item__left">
+                    <FixedCartImage id={id}/>
+                </div>
+                <div className="cart__table__body__col__item__right">
+                    <FixedCartNameAndOptions id={id} options={options}/>
+                    <div className="cart__table__body__col__item__right__functions">
+                    <Link to="#" className="form__textButton">
+                        Edit Item
+                    </Link>
+                    <Link to="#" className="form__textButton" onClick={() => {
+                        this.onDelete(index)
+                    }}>Remove
+                    </Link>
+                    <Link to="#" className="form__textButton">Save to Wishlist
+                    </Link>
+                    </div>
+                </div>
+
+            </div>
+        )
+
+
+    }
+
+    handleChange = (index) => {
+        const text = document.getElementById(`q_${index}`)
+
+        this.props.editQuantity(index, text.value);
+
         text.classList.add('cart__table__input__quantity--update');
-        setTimeout(()=>{
+        setTimeout(() => {
             text.classList.remove('cart__table__input__quantity--update');
-        },1000)
+        }, 1000)
     }
 
 
@@ -120,9 +142,9 @@ class Cart extends Component {
 
             return (
 
-                <div key={item.id} id={`row_${item.id}`} className="cart__table__body__row">
+                <div key={index} id={`row_${index}`} className="cart__table__body__row">
                     <div className="cart__table__body__col">
-                        {this.getItem(item.id)}
+                        {this.getItem(item.id, index,item.options)}
                     </div>
                     <div className="cart__table__body__col">
                         In Stock
@@ -132,16 +154,18 @@ class Cart extends Component {
                         {NumberFormatted(item.price)}
                     </div>
                     <div className="cart__table__body__col">
-                        {this.props.readonly?item.quantity:
-                        <input id={`q_${item.id}`}
-                               className="cart__table__input cart__table__input__quantity"
-                               type="number"
-                               min={0}
-                               //value={this.state.quantity[item.id]}
-                                value={item.quantity}
-                               onChange={e => {
-                                   this.handleChange(item.id, e.target.value)
-                               }}/>}
+
+                            <input id={`q_${index}`}
+                                   className="cart__table__input cart__table__input__quantity"
+                                   type="text"
+
+                                   defaultValue={item.quantity}
+                                   />
+                                   <button className="cart__button--update"
+                                           onClick={()=>{this.handleChange(index)}}
+                                   >
+                                       Update
+                                   </button>
 
                     </div>
                     <div className="cart__table__body__col">
@@ -153,17 +177,23 @@ class Cart extends Component {
     }
 
     render() {
+        if (!this.props.cart) {
+            return <Spinner message={"loading..."}/>
+        }
         return this.renderTable();
     }
 }
 
 function mapStateToProps(state) {
+    if (!state.cart.data) {
+        return {};
+    }
     return {
-        cart: state.cart.data?Object.values(state.cart.data):[],
-        products: state.products
+        cart: state.cart.data,
+        subtotal: state.cart.subtotal
     };
 }
 
 export default connect(
-    mapStateToProps, {fetchCartList, fetchProducts, editQuantity}
+    mapStateToProps, {fetchCartListAndProducts, editQuantity, deleteFromCart}
 )(Cart);

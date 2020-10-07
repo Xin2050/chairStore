@@ -8,15 +8,14 @@ import { NumberFormatted } from "../../apis/NumberFormat";
 //import Popup from "../Popup";
 import _ from 'lodash';
 import history from "../../base/history";
+import Spinner from "../Spinner";
 
 
 class ProductsList extends React.Component {
     state = { gridCols: 3 }
 
-
     componentDidMount() {
         this.props.fetchProducts()
-
     }
     handleOpen = (id)=>{
         history.push(`/detail/${id}`)
@@ -60,6 +59,9 @@ class ProductsList extends React.Component {
         this.setState({ gridCols: x })
     }
     render() {
+        if((!this.props.products)||(this.props.products.isFetching)){
+            return <Spinner message={"Loading...."}/>
+        }
         return (
             <div className="mainContext">
                 <NavBar context="Home > Office"/>
@@ -78,10 +80,15 @@ class ProductsList extends React.Component {
     }
 }
 const mapStateToProps = (state) => {
-    let products = Object.values(state.products);
+
+    if(_.isEmpty(state.products.data)){
+        return {};
+    }
+
+    let products = Object.values(state.products.data);
 
     if(state.products.sort){
-        products = _.chain(state.products)
+        products = _.chain(state.products.data)
             .omit('sort')
             .values()
             .forEach(value => _.update(value,'price',parseFloat))

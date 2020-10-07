@@ -1,12 +1,26 @@
-
 const _ = require('lodash');
 
-const options= [1,2,3,4,5]
+const options = [
+    {
+        id: 1,
+        options: {a: 1, b: 2},
+        q:1
+    },
+    {
+        id: 2,
+        options: {a: 2, b: 3},
+        q:2
+    },
+    {
+        id: 2,
+        options: {a: 2, b: 4},
+        q:3
+    },
+]
 
 
-const [,...rest] = options;
-console.log(rest);
+const index = _.findIndex(options,{id:2,options: {a: 2, b: 4}});
 
-const index = {};
+options[index].q += 1;
 
-console.log(!index);
+console.log(options);

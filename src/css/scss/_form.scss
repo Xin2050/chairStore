@@ -3,8 +3,6 @@
   border-top: 1px solid rgba(223, 223, 223, .8);
 
   &__PrimaryBtn{
-
-
     &{
       text-decoration: none;
       font-size: 1.6rem;
@@ -15,6 +13,11 @@
       color: white;
       padding: .4rem 2rem;
       transition: all .2s;
+      border:none;
+    }
+    &:disabled{
+      pointer-events: none;
+      opacity:.5;
     }
     &:hover{
       cursor: pointer;
@@ -23,6 +26,23 @@
     &:active{
       background-color: $primary-button-color-red-dark;
     }
+    &--gary{
+      color: $primary-text-color-gray;
+      background-color: $primary-button-color-gray;
+      &:hover{
+        background-color: $primary-button-color-gray-light;
+      }
+      &:active{
+        background-color: $primary-button-color-gray-dark;
+      }
+    }
+  }
+  &__textButton{
+    &,&:visited {
+      color: $text-link-color-blue;
+      font-size: 1.5rem;
+    }
+
   }
 
   &__group:not(:last-child){
