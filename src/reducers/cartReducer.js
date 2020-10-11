@@ -5,6 +5,7 @@ export default (state = {}, action) => {
     let newstate;
     switch (action.type) {
         case CART_LIST:
+
             return {...state, ...action.payload};
 
         case CART_ADD: //ok
@@ -25,7 +26,7 @@ export default (state = {}, action) => {
             __saveCart(newstate);
             return newstate;
         case CART_DELETE:
-            console.log(action.payload);
+
             const deletedstate = {...state};
             deletedstate.data.splice(action.payload.index,1);
             __updateTotal(deletedstate);

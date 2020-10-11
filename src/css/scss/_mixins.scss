@@ -18,6 +18,11 @@
   left: auto;
   transform: none;
 }
+@mixin boxShadow{
+  -webkit-box-shadow: 3px 10px 16px -8px rgba(0,0,0,0.58);
+  -moz-box-shadow: 3px 10px 16px -8px rgba(0,0,0,0.58);
+  box-shadow: 3px 10px 16px -8px rgba(0,0,0,0.58);
+}
 
 
 // MEDIA QUERY MANAGER

@@ -742,6 +742,42 @@ select {
   z-index: 99999;
 }
 
+.floatMenu {
+  z-index: 16;
+  display: block;
+  position: absolute;
+  top: 7rem;
+  background: white;
+  font-size: 1.8rem;
+  border-radius: 3px;
+  padding: 1rem 2rem 3rem 2rem;
+  -webkit-box-shadow: 3px 10px 16px -8px rgba(0, 0, 0, 0.58);
+  -moz-box-shadow: 3px 10px 16px -8px rgba(0, 0, 0, 0.58);
+  box-shadow: 3px 10px 16px -8px rgba(0, 0, 0, 0.58);
+  visibility: hidden;
+  opacity: 0;
+  height: 0px;
+  transition: all 0.2s ease-in;
+}
+.floatMenu--show {
+  visibility: visible;
+  opacity: 1;
+  height: auto;
+}
+.floatMenu--show div {
+  visibility: visible;
+  opacity: 1;
+}
+.floatMenu__Item {
+  visibility: hidden;
+  opacity: 0;
+  padding: 0.5rem 1rem;
+}
+.floatMenu__Item a, .floatMenu__Item a:visited {
+  text-decoration: none;
+  color: #5d5d5d;
+}
+
 .cart__head {
   display: flex;
   flex-direction: row;
