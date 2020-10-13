@@ -1,4 +1,4 @@
-import Mark2Win from "../apis/Mark2Win";
+import Server from "../apis/LocalServer";
 import {
     CART_ADD,
     CART_CHECKOUT,
@@ -16,11 +16,11 @@ import _ from 'lodash';
 import history from "../base/history";
 
 
-export const fetchProductThenInitOptions = (id) => async distpatch => {
+export const fetchProductThenInitOptions = (id) => async dispatch => {
 
     const response = await fetchOneProduct(id);
-    distpatch({type: FETCH_PRODUCT, payload: response.data});
-    distpatch({
+    dispatch({type: FETCH_PRODUCT, payload: response.data});
+    dispatch({
         type: OPTIONS_INIT, payload: {
             id: response.data.data.id,
             price: response.data.data.price,
@@ -36,10 +36,10 @@ export const optionsChange = (productId, categoryId, option) => {
 }
 
 
-export const fetchProducts = () => async distpath => {
-    distpath({type: FETCH_REQUEST});
-    const response = await Mark2Win.get('/product');
-    distpath({type: FETCH_PRODUCTS, payload: response.data});
+export const fetchProducts = () => async dispatch => {
+    dispatch({type: FETCH_REQUEST});
+    const response = await Server.get('/product');
+    dispatch({type: FETCH_PRODUCTS, payload: response.data});
 }
 
 
@@ -48,14 +48,15 @@ export const sortProducts = (which, how) => {
 }
 
 const fetchOneProduct = async (id) => {
-    const response = await Mark2Win.get(`/product/${id}`);
+    const response = await Server.get(`/product/${id}`);
     return response;
+
 }
 
-export const fetchProduct = (id) => async distpath => {
+export const fetchProduct = (id) => async dispatch => {
 
     const response = await fetchOneProduct(id)
-    distpath({type: FETCH_PRODUCT, payload: response.data});
+    dispatch({type: FETCH_PRODUCT, payload: response.data});
 }
 
 
@@ -63,29 +64,29 @@ export const fetchOptions = () => {
     return {type: FETCH_OPTIONS};
 }
 
-export const fetchCartListAndProducts = () => async (distpath, getState) => {
+export const fetchCartListAndProducts = () => async (dispatch, getState) => {
 
     new Promise(
         (resolve) => {
-            distpath(fetchCartList())
+            dispatch(fetchCartList())
             resolve("ok")
         }
     ).then((r) => {
         _.chain(getState().cart.data)
             .map("id")
             .uniq()
-            .forEach(id => distpath(fetchProduct(id)))
+            .forEach(id => dispatch(fetchProduct(id)))
             .value();
     })
 
 }
-export const fetchCartList = () => async distpath => {
+export const fetchCartList = () => async dispatch => {
 
     let cart = __loadCart();
     if (!cart) {
         cart = {data: [], subtotal: 0};
     }
-    distpath({type: CART_LIST, payload: cart})
+    dispatch({type: CART_LIST, payload: cart})
 
 }
 

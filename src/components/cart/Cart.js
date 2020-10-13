@@ -1,10 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {fetchCartListAndProducts, editQuantity, deleteFromCart} from "../../actions";
-
 import {NumberFormatted} from "../../apis/NumberFormat";
 import Spinner from "../Spinner";
-import _ from 'lodash';
 import FixedCartImage from "./FixedCartImage";
 import FixedCartNameAndOptions from "./FixedCartNameAndOptions";
 import {Link} from "react-router-dom";

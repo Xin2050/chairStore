@@ -14,6 +14,7 @@ import AddtoCartBar from "./AddtoCartBar";
 import Spinner from "../../Spinner";
 import _ from 'lodash';
 
+
 class ProductDetails extends React.Component {
     id = this.props.match.params.id
 
@@ -22,6 +23,7 @@ class ProductDetails extends React.Component {
     }
 
     render() {
+
 
         if (!this.props.data) {
             return <Spinner message="Loading..."/>

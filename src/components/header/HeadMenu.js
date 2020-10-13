@@ -4,6 +4,7 @@ import {fetchCartListAndProducts} from "../../actions";
 import {connect} from 'react-redux'
 import FixedCartLayer from "../cart/FixedCartLayer";
 import AccountMenu from "../menu/AccountMenu";
+
 import $ from 'jquery';
 
 const HeadMenu = (props) => {
@@ -119,22 +120,22 @@ const HeadMenu = (props) => {
             <div className="headMenu">
                 <div className="headMenu__Items">
                     <div className="headMenu__Item headMenu__Btn--Selected">
-                        <Link to="#" className="menuBtn headMenu__Item--middle">Store</Link>
+                        <Link to="/" className="menuBtn headMenu__Item--middle">Store</Link>
                     </div>
                     <div className="headMenu__Item">
-                        <Link to="#" className="menuBtn headMenu__Item--middle">Contract</Link>
+                        <Link to='#' className="menuBtn headMenu__Item--middle">Contract</Link>
                     </div>
                 </div>
                 <div className="headMenu__centerContext">
-                    <Link to="" className="menuBtn headMenu__centerContext__m1">Customer Service</Link>
-                    <Link to="" className="menuBtn headMenu__centerContext__m2">888 798 0202</Link>
+                    <Link to="#" className="menuBtn headMenu__centerContext__m1">Customer Service</Link>
+                    <Link to="#" className="menuBtn headMenu__centerContext__m2">888 798 0202</Link>
                 </div>
                 <div className="headMenu__functions">
                     <div ref={accountRef} className="headMenu__function"
                          onMouseEnter={()=>{toggleAccountMenu()}}
                          onMouseLeave={()=>{toggleAccountMenu()}}
                     >
-                        <Link to="" className="menuBtn headMenu__Item--middle headMenu__function--color--gray">
+                        <Link to="#" className="menuBtn headMenu__Item--middle headMenu__function--color--gray">
                             My Account <i className="fas fa-user headMenu__function_icon"/>
                         </Link>
                     </div>
@@ -157,6 +158,7 @@ const HeadMenu = (props) => {
 
             </div>
             {fixedCart}
+
             <AccountMenu onMouseHover={keepMenu} onMouseLeave={closeMenu}/>
         </>
     );
