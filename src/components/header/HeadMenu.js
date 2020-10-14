@@ -86,6 +86,8 @@ const HeadMenu = (props) => {
     useEffect(closeFixedCart, [isClose]);
     useEffect(showFixedCart,[isShow]);
 
+
+
     const getCartCounter = () => {
         if (!props.counter) {
             return null;

@@ -14,6 +14,7 @@
       padding: .4rem 2rem;
       transition: all .2s;
       border:none;
+      outline: none;
     }
     &:disabled{
       pointer-events: none;
@@ -36,6 +37,9 @@
         background-color: $primary-button-color-gray-dark;
       }
     }
+    &--wide{
+        width: 20rem;
+    }
   }
   &__textButton{
     &,&:visited {
@@ -50,11 +54,11 @@
   }
 
   &__input{
-    font-size: 1.5rem;
-    padding:1.5rem 2rem;
+    font-size: 1.8rem;
+    padding:1.5rem 1rem;
     border-radius: 2px;
     border:1px solid rgba(223, 223, 223, .8);
-    width:90%;
+    width:100%;
     display: block;
     transition: all .3s;
 
@@ -65,10 +69,7 @@
       box-shadow: 0 1rem 2rem rgba(black,.1);
       border-bottom: 1px solid greenyellow;
     }
-    &--error{
-      background-color: #f17575;
-      border-bottom: 1px solid orangered;
-    }
+
     &__selector{
       display: inline;
       width: 30%;
@@ -84,9 +85,9 @@
 
   }
   &__label{
-    font-size:1.2rem;
+    font-size:1.8rem;
     font-weight: 700;
-    margin-left:2rem;
+    //margin-left:2rem;
     margin-top:.7rem;
     display: block;
     transition: all .3s;
@@ -226,29 +227,44 @@
     visibility: hidden;
     opacity: 0;
     &__button{
-      width: 2.5rem;
-      height: 2.5rem;
+      width: 2rem;
+      height: 2rem;
       display: inline-block;
       position: absolute;
       left:0;
-      border-radius: 2px;
-      border: 3px solid rgba(223, 223, 223, .9);
-
-      &::after{
+      top:0.5rem;
+      border-radius: 3px;
+      border: 2px solid $primary-border-color-gray;
+      &::before{
+        z-index: 1;
         content: "";
         display: block;
         position: absolute;
-        left:50%;
-        top:50%;
-        transform: translate(-50%,-50%);
-        width:1.5rem;
-        height: 1.5rem;
-        border-radius: 3px;
-        background-color: rgba(223, 223, 223, .9);
+        left:35%;
+        top:5%;
+        width: .7rem;
+        height: 1.2rem;
+        border-bottom: 2px solid $primary-bg-color-white;
+        border-right: 2px solid $primary-bg-color-white;
+        transform: rotate(45deg);
+      }
+      &::after{
+
+        content: "";
+        display: block;
+        position: absolute;
+        @include absCenter;
+        width:2rem;
+        height: 2rem;
+        border-radius: 2px;
+        background-color: $primary-button-color-red;
         opacity: 0;
         visibility: hidden;
-        transition: all .4s;
+        transition: all .2s;
       }
+    }
+    &__button:hover{
+      opacity:.5;
     }
 
     &:checked ~ &__button::after{
@@ -257,19 +273,75 @@
     }
 
     &__label{
-      color: #919191;
+      display: flex;
+      align-items: flex-start;
       font-size:1.5rem;
-      font-weight: 700;
+
       padding-left:2rem;
       position: relative;
       transition: all .3s;
       cursor: pointer;
+
+
     }
 
   }
+  &__message{
+    display: inline-block;
+    float:right;
+    font-size: 1.5rem;
+    font-weight: normal;
+    color:green;
+  }
+  &__submitError{
+    position: relative;
+    width: 100%;
+    padding: 1rem 2rem 1rem 4rem;
+    font-size: 1.4rem;
+    color:$primary-text-color-red;
+    background: rgba($primary-bg-color-red,.15);
+    border-radius: 1px;
+    border: 1px solid $primary-border-color-gray-red;
+    &::after{
+      content: "!";
+      display: block;
+      position: absolute;
+      top:8.6%;
+      left:2.2%;
+      font-size: 1.5rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      border: 2px solid $primary-button-color-red;
+      color:$primary-text-color-red;
+      text-align: center;
+    }
+  }
   &__error{
-    background: rgba(coral,.6);
-    color: red;
+    position: relative;
+    & label{
+      color:$primary-text-color-red;
+    }
+    & input{
+      background: $primary-bg-color-gray-light;
+      border: 1px solid $primary-border-color-gray-red;
+    }
+    &::after{
+      content: "!";
+      display: inline-block;
+      position: absolute;
+      top:39.5%;
+      right:4.2%;
+      font-size: 1.5rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      border: 1px solid $primary-button-color-red;
+      color:$primary-text-color-red;
+      text-align: center;
+    }
+
+
     &::placeholder{
       color:red;
       opacity: 1;
@@ -278,6 +350,7 @@
       padding-left: 1rem;
       font-size: 1.5rem;
       color:red;
+      white-space: nowrap;
     }
   }
   &__view__table{

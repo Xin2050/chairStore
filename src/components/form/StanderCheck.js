@@ -29,7 +29,7 @@ const StanderCheck = (props) => {
                 <Field type="checkbox" id={name} component="input" {...input}
                        className="form__input__checkbox"
                        />
-                {label}
+                <div>{label}</div>
                 <span className="form__input__checkbox__button"></span>
             </label>
             {renderErrorMessage(meta)}

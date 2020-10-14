@@ -1,35 +1,7 @@
 import _ from 'lodash'
 import {FETCH_OPTIONS, OPTIONS_CHANGE, OPTIONS_INIT} from "../actions/types";
 
-const _loadInitOptions = (items)=>{
-    const options = {};
-    items.forEach(item=>{
-        let system_default = _.findIndex(item.profileItems, {"checked": true});
-        if (-1===system_default){
-            system_default = 0;
-        }
-        options[item.id]= _createOption(item,system_default)
-    })
 
-    return options;
-}
-const _calTotal = (state,productId)=>{
-    const subtotal = _.reduce(Object.values(state[productId].options),
-        (sum, item) => {
-            return sum + Number(item.price)
-        }, 0)
-
-    state[productId].optionsTotal = subtotal;
-    state[productId].total =  state[productId].price + subtotal;
-    //return state;
-}
-const _createOption = (item,index)=>{
-    return {
-        categoryId:item.id,
-        itemId: item.profileItems[index].id,
-        price:item.profileItems[index].price
-    }
-}
 export default (state = {}, action) => {
 
     switch (action.type) {
@@ -67,5 +39,34 @@ export default (state = {}, action) => {
 
         default:
             return state;
+    }
+}
+const _loadInitOptions = (items)=>{
+    const options = {};
+    items.forEach(item=>{
+        let system_default = _.findIndex(item.profileItems, {"checked": true});
+        if (-1===system_default){
+            system_default = 0;
+        }
+        options[item.id]= _createOption(item,system_default)
+    })
+
+    return options;
+}
+const _calTotal = (state,productId)=>{
+    const subtotal = _.reduce(Object.values(state[productId].options),
+        (sum, item) => {
+            return sum + Number(item.price)
+        }, 0)
+
+    state[productId].optionsTotal = subtotal;
+    state[productId].total =  state[productId].price + subtotal;
+    //return state;
+}
+const _createOption = (item,index)=>{
+    return {
+        categoryId:item.id,
+        itemId: item.profileItems[index].id,
+        price:item.profileItems[index].price
     }
 }

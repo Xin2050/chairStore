@@ -21,6 +21,12 @@
   justify-content: space-between;
   align-items: center;
 }
+.flex_Row_SpaceBetween_Top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
 
 .flex_Row_Middle_Center {
   display: flex;

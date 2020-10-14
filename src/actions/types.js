@@ -2,6 +2,8 @@ export const FETCH_REQUEST = 'FETCH_REQUEST';
 
 export const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
 export const FETCH_PRODUCT = 'FETCH_PRODUCT';
+export const FETCH_OPTIONS = 'FETCH_OPTIONS';
+
 export const SORT_PRODUCTS = 'SORT_PRODUCTS';
 
 export const CART_LIST = 'CART_LIST';
@@ -13,4 +15,7 @@ export const CART_CHECKOUT='CART_CHECKOUT';
 
 export const OPTIONS_INIT = 'OPTIONS_INIT';
 export const OPTIONS_CHANGE = 'OPTIONS_CHANGE';
-export const FETCH_OPTIONS = 'FETCH_OPTIONS';
+
+export const AUTH_USER = 'AUTH_USER';
+export const AUTH_ERROR='AUTH_ERROR';
+export const CHECK_EMAIL = 'CHECK_EMAIL';

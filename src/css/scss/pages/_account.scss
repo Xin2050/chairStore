@@ -1,0 +1,21 @@
+.account__content{
+  display: flex;
+  justify-content: space-between;
+
+  &__signInOrRegisterModel{
+
+    width: 50%;
+    padding: 2rem 2rem;
+
+
+
+    &__secondaryTitle{
+      font-size: 2.5rem;
+      padding: 2rem 0;
+      font-weight: bold;
+    }
+    &__required{
+      font-size: 1.5rem;
+    }
+  }
+}

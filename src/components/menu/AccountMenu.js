@@ -13,7 +13,7 @@ const AccountMenu = (props) => {
                 <Link to={{pathname:"/signin",state:{lasturl:useLocation().pathname}}} >Sign in </Link>
             </div>
             <div className="floatMenu__Item">
-                <Link to='#'>Register </Link>
+                <Link to={{pathname:"/signin",state:{lasturl:useLocation().pathname}}}>Register </Link>
             </div>
             <div className="floatMenu__Item">
                 <Link to="/signout">Sign Out </Link>

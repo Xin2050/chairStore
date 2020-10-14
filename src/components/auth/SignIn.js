@@ -1,24 +1,32 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {signIn} from "../../actions";
 
-import {compose} from 'redux';
 import {connect} from "react-redux";
 import SignInForm from "./SignInForm";
+import RegisterForm from "./RegisterForm";
+
 
 
 const SignIn = (props) => {
-    const onSignInSubmit = (formProps)=>{
-        console.log(formProps);
-        console.log(props.location.state)
-    }
+
+    const [lasturl,setLasturl] = useState(()=>{
+        if(props.location?.state?.lasturl){
+            return props.location.state.lasturl;
+        }else{
+            return "/";
+        }
+    });
+
+
     return (
         <div className="mainContext">
-            <div className="">Sign In or Register</div>
-            <div>
-                <div>
-                    <SignInForm handleSignIn={onSignInSubmit}/>
+            <div className="mainContext__h1">Sign In or Register</div>
+            <div className="account__content">
+                <div className="account__content__signInOrRegisterModel">
+                    <SignInForm backurl={lasturl}/>
                 </div>
-                <div>
-                    //regmodel
+                <div className="account__content__signInOrRegisterModel">
+                    <RegisterForm backurl={lasturl}/>
                 </div>
             </div>
 
@@ -32,6 +40,4 @@ const mapStateToProps=(state)=>{
     return {};
 }
 
-export default compose(
-    connect(mapStateToProps,{})
-)(SignIn);
+export default connect(mapStateToProps,{signIn})(SignIn);

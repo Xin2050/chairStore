@@ -3,26 +3,32 @@ import React from 'react';
 
 const StanderInputText = (props) => {
 
-    let {input,label, meta,myclass,type} = props;
+    let {input,label, meta,myclass,type,message} = props;
 
     const renderErrorMessage=(meta)=>{
         //console.log(meta);
-        const {error,touched} = meta;
+        const {error,touched,asyncValidating} = meta;
         if(error&&touched){
-            //todo: give submit button a shark and set to disabled.
-            return error;
+            return <div className="form__error__message">{error}</div>;
         }
         return null;
     }
+    const renderMessage=()=>{
+        if(message?.checkEmail){
+            return <div className="form__message">{message.checkEmail} </div>
+        }
+    }
     type = type?type:"text";
-    let className = myclass?myclass:"form__input";
+    let className = myclass?myclass:"form__group";
     className = className.concat(meta.error&&meta.touched?' form__error':'');
     return (
-        <div className="form__group">
-
-            <input type={type} className={className} {...input}
-                   placeholder={renderErrorMessage(meta)||label} autoComplete="off"/>
-            <label className="form__label">{label}</label>
+        <div className={className}>
+            <label className="form__label">{label}
+                {renderMessage()}
+            </label>
+            <input type={type} className="form__input" {...input}
+                    autoComplete="off"/>
+            {renderErrorMessage(meta)}
 
         </div>
     );

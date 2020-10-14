@@ -10,17 +10,58 @@ import {
     SORT_PRODUCTS,
     OPTIONS_CHANGE,
     OPTIONS_INIT,
-    FETCH_OPTIONS, FETCH_REQUEST
+    FETCH_OPTIONS, FETCH_REQUEST,
+    AUTH_USER,
+    AUTH_ERROR
 } from "./types";
 import _ from 'lodash';
 import history from "../base/history";
 
+export const signIn = (formValues,callback) => async dispatch => {
+    try {
+        const response = await Server.post('/signin', formValues);
+        setTimeout(() => {
+            dispatch({type: AUTH_USER, payload: response.data.token});
+            localStorage.setItem('token',response.data.token);
+            callback(true);
+        }, 1000) ///this is for testing only
+    } catch (e) {
+        setTimeout(() => {
+            console.log("Login Error!");
+            callback(false);
+            dispatch({
+                type: AUTH_ERROR,
+                payload: "Sorry, this does not match our records. Check your spelling and try again."
+            })
+        },1000);
+    }
+}
 
-export const fetchProductThenInitOptions = (id) => async dispatch => {
+export const checkEmail = async (email,callback)=>{
+
+    try{
+
+        const response = await Server.post('/check/email',email);
+        setTimeout(()=>{
+            callback(response.data);
+        },1000)
+    }catch (e){
+        setTimeout(()=>{
+            callback({rs:false,message:e.message});
+        },1000)
+    }
+}
+
+export const signOut = ()=>{
+    localStorage.removeItem('token');
+    return ({type:AUTH_USER,payload:''});
+}
+
+export const fetchProductThenInitOptions = (id) => async distpatch => {
 
     const response = await fetchOneProduct(id);
-    dispatch({type: FETCH_PRODUCT, payload: response.data});
-    dispatch({
+    distpatch({type: FETCH_PRODUCT, payload: response.data});
+    distpatch({
         type: OPTIONS_INIT, payload: {
             id: response.data.data.id,
             price: response.data.data.price,
