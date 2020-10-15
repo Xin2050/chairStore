@@ -4,9 +4,9 @@ import {connect} from 'react-redux';
 import {compose} from 'redux';
 import StanderCheck from "../form/StanderCheck";
 import StanderInputText from "../form/StanderInputText";
-import {checkEmail, signup} from "../../actions";
+import {signup} from "../../actions";
 import {CHECK_EMAIL} from "../../actions/types";
-import history from "../../base/history";
+
 
 
 const RegisterForm = (props) => {
@@ -18,18 +18,18 @@ const RegisterForm = (props) => {
         alert("This function is not available!");
         return;
 
-        return new Promise((resolve) => {
-            props.signup(formProps, resolve);
-        }).then((rs) => {
-
-            if (rs.rs) {
-                history.push('/welcome')
-            } else {
-                console.log("error");
-            }
-
-
-        })
+        // return new Promise((resolve) => {
+        //     props.signup(formProps, resolve);
+        // }).then((rs) => {
+        //
+        //     if (rs.rs) {
+        //         history.push('/welcome')
+        //     } else {
+        //         console.log("error");
+        //     }
+        //
+        //
+        // })
     }
 
     // function renderErrorMessage() {

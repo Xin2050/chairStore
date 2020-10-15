@@ -2,10 +2,11 @@ import React, {useRef} from 'react';
 import NavBar from "../products/NavBar";
 import CartHead from "./CartHead";
 import Cart from "./Cart";
-import {createOrder} from "../../actions";
+import {createOrder,actPayment} from "../../actions";
 import {connect} from 'react-redux'
 
 import requestAuth from "../auth/requestAuth";
+import history from "../../base/history";
 
 
 
@@ -16,7 +17,7 @@ const CheckoutPage = (props) => {
     const next=()=>{
         submitbtn.current.innerText = "Confirm Order";
         submitbtn.current.disabled = false;
-        console.log("I will go to the order page");
+        history.push("/cart/payorder");
     }
     const error=(message)=>{
         submitbtn.current.innerText = "Confirm Order";

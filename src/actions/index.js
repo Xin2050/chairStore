@@ -36,6 +36,7 @@ export const authCheck = (callback) => async dispatch => {
 
 }
 
+
 export const signIn = (formValues, callback) => async dispatch => {
     try {
         const response = await Server.post('/auth/login', formValues);
@@ -188,7 +189,7 @@ export const editQuantity = (index, quantity) => {
 }
 export const createOrder = (token, cart, next,error) => async dispatch => {
     try{
-        const response = await Server.post("/sorder",__prepareCreateOrderData(cart),{
+        const response = await Server.post("/order",__prepareCreateOrderData(cart),{
             headers:{
                 "Authorization":"bearer ".concat(token)
             }
@@ -223,3 +224,31 @@ export const addToCart = (data) => {
         payload: data
     }
 }
+
+export const loadOrder=()=>async dispatch=>{
+    dispatch({type:'LOAD_FROM_LOCAL'});
+}
+
+export const actPayment  = (res, order, notes) => dispatch => {
+
+    let data = {};
+    console.log('actPayment--->>>>>>>>>', res);
+    console.log('res.iddddddd ----->', res.id);
+
+    data.order = order;
+    data.gateway = res.payer.payment_method;
+    data.transactionId = res.id;
+    data.status = res.state;
+    data.amount = res.transactions.map(a => a.amount.total);
+    data.notes = notes;
+
+    let result = JSON.stringify(res);
+
+    console.log('order, gateway, transactionId, state, amount, notes  ====>>>>>>', data);
+
+    // dispatch({type: PAYMENT_CREATE, payload: data});
+
+    const token  = localStorage.getItem('token');
+    Server.post('/payment', data, {headers :{'Authorization':`Bear ${token}`}})
+
+};
