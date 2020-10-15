@@ -15,6 +15,7 @@ import ProductDetails from "./products/product/ProductDetails";
 import SignIn from "./auth/SignIn";
 import SignOut from "./auth/SignOut";
 import Orders from "./orders/Orders";
+import Welcome from "./auth/Welcome";
 
 
 class App extends React.Component{
@@ -35,6 +36,7 @@ class App extends React.Component{
                         <Route path="/cart/checkoutedit" exact component={EditOrderPage}/>
                         <Route path="/signin" exact component={SignIn}/>
                         <Route path="/signout" exact component={SignOut}/>
+                        <Route path="/welcome" exact component={Welcome}/>
                         <Route path="/orders" exact component={Orders}/>
                     </Switch>
                     <Footer/>

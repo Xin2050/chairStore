@@ -9,7 +9,7 @@ import RegisterForm from "./RegisterForm";
 
 const SignIn = (props) => {
 
-    const [lasturl,setLasturl] = useState(()=>{
+    const [lasturl] = useState(()=>{
         if(props.location?.state?.lasturl){
             return props.location.state.lasturl;
         }else{
@@ -26,7 +26,7 @@ const SignIn = (props) => {
                     <SignInForm backurl={lasturl}/>
                 </div>
                 <div className="account__content__signInOrRegisterModel">
-                    <RegisterForm backurl={lasturl}/>
+                    <RegisterForm />
                 </div>
             </div>
 

@@ -117,6 +117,14 @@ const HeadMenu = (props) => {
     const closeMenu = ()=>{
         $('#accountMenu').removeClass("floatMenu--show");
     }
+    const renderMyName = ()=>{
+        if(!props.auth){
+            return;
+        }
+        if(props.auth.user){
+            return `(${props.auth.user.name})`
+        }
+    }
     return (
         <>
             <div className="headMenu">
@@ -138,7 +146,10 @@ const HeadMenu = (props) => {
                          onMouseLeave={()=>{toggleAccountMenu()}}
                     >
                         <Link to="#" className="menuBtn headMenu__Item--middle headMenu__function--color--gray">
-                            My Account <i className="fas fa-user headMenu__function_icon"/>
+                            My Account
+                            {renderMyName()}
+                            <i className="fas fa-user headMenu__function_icon"/>
+
                         </Link>
                     </div>
                     <div className="headMenu__function">
@@ -172,6 +183,6 @@ const mapStateToProps = (state) => {
         return {counter: "loading..."};
     }
     const counter = Object.values(state.cart.data).reduce((total, item) => total + item.quantity, 0)
-    return {counter};
+    return {counter,auth:state.auth};
 }
 export default connect(mapStateToProps, {fetchCartListAndProducts})(HeadMenu);

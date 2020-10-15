@@ -17,5 +17,8 @@ export const OPTIONS_INIT = 'OPTIONS_INIT';
 export const OPTIONS_CHANGE = 'OPTIONS_CHANGE';
 
 export const AUTH_USER = 'AUTH_USER';
+export const AUTH_CHECK = 'AUTH_CHECK';
+//export const AUTH_CHECK_ERROR = 'AUTH_CHECK_ERROR';
 export const AUTH_ERROR='AUTH_ERROR';
 export const CHECK_EMAIL = 'CHECK_EMAIL';
+export const SIGN_OUT = 'SIGN_OUT';

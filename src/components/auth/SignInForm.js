@@ -7,7 +7,7 @@ import {signIn} from "../../actions";
 import history from "../../base/history";
 
 const SignInForm = (props) => {
-    const {pristine, reset, submitting,backurl} = props;
+    const {pristine, submitting,backurl} = props;
 
     const btnref = useRef();
     useEffect(()=>{

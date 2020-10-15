@@ -49,9 +49,30 @@
 
   }
 
-  &__group:not(:last-child){
-    margin-bottom: 2rem;
+  &__group{
+    position: relative;
+    &__asyncValidating{
+      opacity:.8;
+
+      &::after{
+        z-index: 3;
+        content: "";
+        position: absolute;
+        top: 37%;
+        right: 2%;
+        width: 5rem;
+        height: 5rem;
+        background-image: url('/images/Spinner-gary.svg');
+        background-size: 100%;
+        background-repeat: no-repeat;
+      }
+    }
+
+    &:not(:last-child){
+      margin-bottom: 2rem;
+    }
   }
+
 
   &__input{
     font-size: 1.8rem;

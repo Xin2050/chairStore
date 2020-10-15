@@ -1,4 +1,7 @@
 import Server from "../apis/LocalServer";
+//import Server from '../apis/Mark2Win';
+
+
 import {
     CART_ADD,
     CART_CHECKOUT,
@@ -12,17 +15,36 @@ import {
     OPTIONS_INIT,
     FETCH_OPTIONS, FETCH_REQUEST,
     AUTH_USER,
-    AUTH_ERROR
+    AUTH_CHECK,
+    AUTH_ERROR,SIGN_OUT
 } from "./types";
 import _ from 'lodash';
 import history from "../base/history";
 
-export const signIn = (formValues,callback) => async dispatch => {
+export const authCheck = (token,callback) => async dispatch => {
+    if(!token.token){
+        //console.log("empty");
+        token.token = localStorage.getItem('token');
+        if(!token.token){
+            callback();
+            dispatch({type:AUTH_CHECK,payload:null})
+        }
+    }
+    try{
+        const response = await Server.post('/authCheck', token);
+        dispatch({type:AUTH_CHECK,payload:{token:token.token,user:response.data.user}})
+    }catch (e){
+        callback();
+        dispatch({type:AUTH_CHECK,payload:null})
+    }
+}
+
+export const signIn = (formValues, callback) => async dispatch => {
     try {
         const response = await Server.post('/signin', formValues);
         setTimeout(() => {
-            dispatch({type: AUTH_USER, payload: response.data.token});
-            localStorage.setItem('token',response.data.token);
+            dispatch({type: AUTH_USER, payload: response.data});
+            localStorage.setItem('token', response.data.token);
             callback(true);
         }, 1000) ///this is for testing only
     } catch (e) {
@@ -33,28 +55,49 @@ export const signIn = (formValues,callback) => async dispatch => {
                 type: AUTH_ERROR,
                 payload: "Sorry, this does not match our records. Check your spelling and try again."
             })
-        },1000);
+        }, 1000);
     }
 }
 
-export const checkEmail = async (email,callback)=>{
+export const checkEmail = async (email, callback) => {
 
-    try{
+    try {
 
-        const response = await Server.post('/check/email',email);
-        setTimeout(()=>{
+        const response = await Server.post('/check/email', email);
+        setTimeout(() => {
             callback(response.data);
-        },1000)
-    }catch (e){
-        setTimeout(()=>{
-            callback({rs:false,message:e.message});
-        },1000)
+        }, 1000)
+    } catch (e) {
+        setTimeout(() => {
+            callback({rs: false, message: e.message});
+        }, 1000)
     }
 }
 
-export const signOut = ()=>{
+export const signOut = () =>dispatch=>{
     localStorage.removeItem('token');
-    return ({type:AUTH_USER,payload:''});
+    dispatch ({type: SIGN_OUT});
+}
+
+export const signup = (formValues, callback) => async dispatch => {
+    try {
+        const response = await Server.post('/signup', formValues);
+        setTimeout(() => {
+            dispatch({type: AUTH_USER, payload: response.data});
+            localStorage.setItem('token', response.data.token);
+            callback({rs: true, message: "ok"});
+        }, 1000) ///this is for testing only
+    } catch (e) {
+        setTimeout(() => {
+            callback({rs: false, message: "Email is in Use. Please try another one!"});
+            dispatch({
+                type: AUTH_ERROR,
+                payload: "Email is in Use. Please try another one!"
+            })
+        }, 1000);
+    }
+
+
 }
 
 export const fetchProductThenInitOptions = (id) => async distpatch => {
