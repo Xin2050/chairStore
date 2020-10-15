@@ -42,7 +42,7 @@ class Cart extends React.Component {
 
     renderTableFooter() {
 
-        const gst = this.props.subtotal * 0.18;
+        const gst = this.props.subtotal * 0.13;
         const delivery = 22;
         const total = this.props.subtotal + delivery + gst;
         return (

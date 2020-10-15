@@ -16,8 +16,8 @@ const CartPage = () => {
                     <button onClick={() => {
                         history.push('/cart/checkout')
                     }}
-                            className="form__btn form__btn__primaryButton">
-                        <i className="icon-ecommerce-cart-check form__btn__icon--checkout"/>
+                            className="form__PrimaryBtn form__PrimaryBtn--wide">
+
                         Checkout
                     </button>
                 </div>

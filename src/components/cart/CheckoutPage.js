@@ -1,16 +1,32 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import NavBar from "../products/NavBar";
 import CartHead from "./CartHead";
 import Cart from "./Cart";
-import {cartCheckOut} from "../../actions";
+import {createOrder} from "../../actions";
 import {connect} from 'react-redux'
-import CheckoutForm from "./CheckoutForm";
+
+import requestAuth from "../auth/requestAuth";
 
 
-const CheckoutPage = ({cartCheckOut}) => {
 
-    const onSubmit=(formValues)=>{
-        cartCheckOut(formValues);
+
+const CheckoutPage = (props) => {
+    const submitbtn = useRef();
+
+    const next=()=>{
+        submitbtn.current.innerText = "Confirm Order";
+        submitbtn.current.disabled = false;
+        console.log("I will go to the order page");
+    }
+    const error=(message)=>{
+        submitbtn.current.innerText = "Confirm Order";
+        submitbtn.current.disabled = false;
+        alert(message);
+    }
+    const createOrder=()=>{
+        submitbtn.current.innerText = "Create Order...";
+        submitbtn.current.disabled = true;
+        props.createOrder(props.auth.authorization,props.cart,next,error);
     }
 
 
@@ -19,11 +35,19 @@ const CheckoutPage = ({cartCheckOut}) => {
             <NavBar context="Home > Cart > Check Out"/>
             <CartHead title="Check Out"/>
             <Cart/>
-            <CheckoutForm onSubmit={onSubmit}/>
-
-
+            <div className="cart__footer__div">
+                <button onClick={createOrder} ref={submitbtn}
+                        className="form__PrimaryBtn form__PrimaryBtn--wide">
+                    Confirm Order
+                </button>
+            </div>
         </div>
     );
 };
-
-export default connect(null,{cartCheckOut})(CheckoutPage);
+const mapStateToProps=(state)=>{
+ return {
+    cart:state.cart,
+     auth:state.auth
+ };
+}
+export default connect(mapStateToProps,{createOrder})(requestAuth(CheckoutPage));

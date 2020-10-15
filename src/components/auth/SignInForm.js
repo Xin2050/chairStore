@@ -7,7 +7,7 @@ import {signIn} from "../../actions";
 import history from "../../base/history";
 
 const SignInForm = (props) => {
-    const {pristine, submitting,backurl} = props;
+    const { submitting,backurl} = props;
 
     const btnref = useRef();
     useEffect(()=>{
@@ -57,7 +57,7 @@ const SignInForm = (props) => {
                        type="password" component={StanderInputText}/>
                 <div className="form__group">
                     <button  ref={btnref} className="form__PrimaryBtn form__PrimaryBtn--wide"
-                            disabled={submitting||pristine}
+                            disabled={submitting}
                     >Sign In</button>
                 </div>
 
@@ -82,8 +82,8 @@ const mapStateToProps=(state)=>{
  return {
      auth:state.auth,
      initialValues:{
-         email:'1232TEST@abc.com',
-         password:'123'
+         email:'markxu@mark2win.com',
+         password:'Mark2win'
      }
  };
 }

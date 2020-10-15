@@ -8,13 +8,15 @@ export default ChildComponent=>{
 
     class ComposedComponent extends React.Component{
 
+
         goAway = ()=>{
-            history.push('/signin')
+            const lasturl = history.location.pathname;
+            history.push({pathname: "/signin", state: {lasturl}})
         }
         checkAuth = ()=>{
 
             if(!this.props.auth.user){
-               this.props.authCheck({token:null},this.goAway)
+               this.props.authCheck(this.goAway)
             }
 
         }

@@ -1,10 +1,9 @@
-import Server from "../apis/LocalServer";
-//import Server from '../apis/Mark2Win';
+//import Server from "../apis/LocalServer";
+import Server from '../apis/Mark2Win';
 
 
 import {
     CART_ADD,
-    CART_CHECKOUT,
     CART_DELETE,
     CART_LIST,
     CART_UPDATE,
@@ -16,35 +15,34 @@ import {
     FETCH_OPTIONS, FETCH_REQUEST,
     AUTH_USER,
     AUTH_CHECK,
-    AUTH_ERROR,SIGN_OUT
+    AUTH_ERROR, SIGN_OUT,
+    CREATE_ORDER
 } from "./types";
 import _ from 'lodash';
-import history from "../base/history";
 
-export const authCheck = (token,callback) => async dispatch => {
-    if(!token.token){
-        //console.log("empty");
-        token.token = localStorage.getItem('token');
-        if(!token.token){
-            callback();
-            dispatch({type:AUTH_CHECK,payload:null})
-        }
-    }
-    try{
-        const response = await Server.post('/authCheck', token);
-        dispatch({type:AUTH_CHECK,payload:{token:token.token,user:response.data.user}})
-    }catch (e){
+
+export const authCheck = (callback) => async dispatch => {
+    // Actually should be a API to support this method,
+    // for now does not have it. So, I don't know if your token is real
+    // or whatever I loaded from the local storage that it is accurate user information.
+    const token = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (token && user) {
+        dispatch({type: AUTH_CHECK, payload: {token, user}})
+    } else {
         callback();
-        dispatch({type:AUTH_CHECK,payload:null})
+
     }
+
 }
 
 export const signIn = (formValues, callback) => async dispatch => {
     try {
-        const response = await Server.post('/signin', formValues);
+        const response = await Server.post('/auth/login', formValues);
         setTimeout(() => {
-            dispatch({type: AUTH_USER, payload: response.data});
-            localStorage.setItem('token', response.data.token);
+            dispatch({type: AUTH_USER, payload: response.data.data});
+            localStorage.setItem('token', response.data.data.token);
+            localStorage.setItem('user', JSON.stringify(response.data.data.user))
             callback(true);
         }, 1000) ///this is for testing only
     } catch (e) {
@@ -59,6 +57,7 @@ export const signIn = (formValues, callback) => async dispatch => {
     }
 }
 
+//@Deprecated because server not support this
 export const checkEmail = async (email, callback) => {
 
     try {
@@ -74,11 +73,13 @@ export const checkEmail = async (email, callback) => {
     }
 }
 
-export const signOut = () =>dispatch=>{
+export const signOut = () => dispatch => {
     localStorage.removeItem('token');
-    dispatch ({type: SIGN_OUT});
+    localStorage.removeItem('user');
+    dispatch({type: SIGN_OUT});
 }
 
+//@Deprecated because server not support this
 export const signup = (formValues, callback) => async dispatch => {
     try {
         const response = await Server.post('/signup', formValues);
@@ -185,10 +186,36 @@ export const deleteFromCart = (index) => {
 export const editQuantity = (index, quantity) => {
     return {type: CART_UPDATE, payload: {index, quantity}}
 }
-export const cartCheckOut = formValues => async dispatch => {
+export const createOrder = (token, cart, next,error) => async dispatch => {
+    try{
+        const response = await Server.post("/sorder",__prepareCreateOrderData(cart),{
+            headers:{
+                "Authorization":"bearer ".concat(token)
+            }
+        })
+        dispatch({type: CREATE_ORDER, payload: {rs:true,data:response.data.data,message:""}});
+        next();
+    }catch (e){
+        dispatch({type: CREATE_ORDER, payload:{rs:false,data:null,message:"Create Order Error,Please try again."}})
+        error(e.message);
+    }
+}
 
-    dispatch({type: CART_CHECKOUT, payload: {order: formValues}});
-    history.push('/cart/vieworder')
+const __prepareCreateOrderData = (cart) => {
+
+    return {
+        taxRate: 1.13,
+        isActive: true,
+        isDelete: false,
+        orderItems: _.values(cart.data).map((product) => {
+            return {
+                quantity: product.quantity,
+                product: product.id,
+                profileItems: _.values(product.options).map(item => item.itemId)
+            }
+        })
+    }
+
 }
 export const addToCart = (data) => {
     return {

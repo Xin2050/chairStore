@@ -35,7 +35,7 @@ const HeadMenu = (props) => {
 
     const showFixedCart = (delay=0) => {
 
-        if(window.location.pathname==="/cart"){
+        if(window.location.pathname.includes("/cart")){
             return;
         }
         if (props.counter === "loading...") {
@@ -122,7 +122,7 @@ const HeadMenu = (props) => {
             return;
         }
         if(props.auth.user){
-            return `(${props.auth.user.name})`
+            return `(${props.auth.user.firstName})`
         }
     }
     return (

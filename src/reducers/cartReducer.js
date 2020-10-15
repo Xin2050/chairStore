@@ -1,4 +1,4 @@
-import {CART_ADD, CART_CHECKOUT, CART_CLEAR, CART_DELETE, CART_LIST, CART_UPDATE} from "../actions/types";
+import {CART_ADD,  CART_CLEAR, CART_DELETE, CART_LIST, CART_UPDATE} from "../actions/types";
 import _ from 'lodash';
 
 export default (state = {}, action) => {
@@ -42,14 +42,11 @@ export default (state = {}, action) => {
             __updateTotal(updatedState);
             __saveCart(updatedState);
             return updatedState;
-        case CART_CHECKOUT://todo have to fix
-            const checkoutstate = {...state, ...action.payload};
-            __saveCart(checkoutstate);
-            return checkoutstate;
+
         case CART_CLEAR:
             newstate  = {data:[],subtotal:0};
             __saveCart(newstate);
-            return
+            return newstate;
         default:
             return state;
     }

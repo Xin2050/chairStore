@@ -15,7 +15,9 @@ const RegisterForm = (props) => {
 
 
     const onRegisterSubmit = (formProps) => {
-        console.log(formProps);
+        alert("This function is not available!");
+        return;
+
         return new Promise((resolve) => {
             props.signup(formProps, resolve);
         }).then((rs) => {
@@ -108,7 +110,11 @@ const validate = (formValues) => {
 const asyncValidate = (value, dispatch) => {
 
     return new Promise((resolve) => {
-        checkEmail(value, resolve);
+        setTimeout(
+            ()=>{
+                resolve({rs:true,message:"This email is available."})
+            },1000)
+        //checkEmail(value, resolve);
     }).then((rs) => {
         if (rs.rs) {
             dispatch({type: CHECK_EMAIL, payload: rs.message})

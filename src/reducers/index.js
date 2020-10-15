@@ -5,6 +5,7 @@ import cartReducer from "./cartReducer";
 import {reducer as formReducer} from 'redux-form';
 import optionsReducer from "./optionsReducer";
 import authReducer from "./authReducer";
+import orderReducer from "./orderReducer";
 
 
 export default combineReducers({
@@ -12,6 +13,7 @@ export default combineReducers({
     cart:cartReducer,
     form:formReducer,
     options:optionsReducer,
-    auth:authReducer
+    auth:authReducer,
+    order:orderReducer
 
 })

@@ -9,8 +9,7 @@ import {fetchCartList} from "../actions";
 import {connect} from "react-redux";
 import CartPage from "./cart/CartPage";
 import CheckoutPage from "./cart/CheckoutPage";
-import ViewOrderPage from "./cart/ViewOrderPage";
-import EditOrderPage from "./cart/EditOrderPage";
+
 import ProductDetails from "./products/product/ProductDetails";
 import SignIn from "./auth/SignIn";
 import SignOut from "./auth/SignOut";
@@ -32,8 +31,6 @@ class App extends React.Component{
                         <Route path="/detail/:id" exact component={ProductDetails}/>
                         <Route path="/cart" exact component={CartPage}/>
                         <Route path="/cart/checkout" exact component={CheckoutPage}/>
-                        <Route path="/cart/vieworder" exact component={ViewOrderPage}/>
-                        <Route path="/cart/checkoutedit" exact component={EditOrderPage}/>
                         <Route path="/signin" exact component={SignIn}/>
                         <Route path="/signout" exact component={SignOut}/>
                         <Route path="/welcome" exact component={Welcome}/>
