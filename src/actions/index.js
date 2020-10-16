@@ -242,7 +242,7 @@ export const actPayment  = (res, order, notes) => dispatch => {
     data.amount = res.transactions.map(a => a.amount.total);
     data.notes = notes;
 
-    let result = JSON.stringify(res);
+    //let result = JSON.stringify(res);
 
     console.log('order, gateway, transactionId, state, amount, notes  ====>>>>>>', data);
 

@@ -8,7 +8,6 @@
 html{
   font-size:62.5%; //16px
 
-
   @include respond(big-screen) {
     font-size: 75%;
   }

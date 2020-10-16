@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import {useLocation} from 'react-router';
 
 import $ from 'jquery';
+import history from "../../base/history";
 
 const CalgaryMenu = () => {
     const url = useLocation().pathname;
@@ -71,7 +72,9 @@ const CalgaryMenu = () => {
             <div className="calgaryMenu__search">
                 <div className="calgaryMenu__search__icongroup">
                     <i className="fas fa-search calgaryMenu__search__icon menuBtn"/>
-                    <i className="fas fa-shopping-cart mediaSrc__cartIcon menuBtn"/>
+                    <i className="fas fa-shopping-cart mediaSrc__cartIcon menuBtn" onClick={()=>{
+                        history.push('/cart')
+                    }}/>
                 </div>
             </div>
         </div>

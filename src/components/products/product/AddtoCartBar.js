@@ -4,11 +4,13 @@ import {NumberFormatted} from "../../../apis/NumberFormat";
 import {connect} from 'react-redux';
 import {fetchOptions,addToCart} from "../../../actions";
 import $ from "jquery";
+import Spinner from "../../Spinner";
 
 
 
 
-const AddtoCartBar = ({data,fetchOptions,addToCart,total}) => {
+const AddtoCartBar = (props) => {
+    const {data,fetchOptions,addToCart,total,product} = props;
     const [buttonText,setButtonText] = useState("Add To Cart");
     const btnref = useRef();
 
@@ -45,14 +47,16 @@ const AddtoCartBar = ({data,fetchOptions,addToCart,total}) => {
 
     }
     const [q,setQ] = useState(1);
+
     return (
+        (!product)?<Spinner message="loading"/>:
         <div className="addCartBar">
             <div className="addCartBar__left">
                 <div className="addCartBar__left__namebox">
-                    {data.name}
+                    {product.name}
                 </div>
                 <div className="addCartBar__left__pic">
-                    <img src="" alt="" className="addCartBar__left__pic__img"/>
+                    <img src={product.media.split("|")[0]} alt="" className="addCartBar__left__pic__img"/>
                 </div>
             </div>
             <div className="addCartBar__right">
@@ -83,7 +87,8 @@ const mapStateToProps=(state,ownProps)=>{
         return {total:"loading..."}
     }
  return {
-        data:state.options[ownProps.data.id]
+        data:state.options[ownProps.data.id],
+        product:state.products[ownProps.data.id]
  };
 }
 export default connect(mapStateToProps,{fetchOptions,addToCart})(AddtoCartBar);

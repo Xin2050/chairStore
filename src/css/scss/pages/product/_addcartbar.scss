@@ -20,12 +20,22 @@
       font-size:1.6rem;
       vertical-align: middle;
       margin: 3rem 3rem;
-
+      @include respond(tablet-middle){
+        margin: 3rem 1rem;
+      }
+      @include respond(phone){
+        display: none;
+      }
     }
     &__pic{
       display: none;
+      @include respond(phone){
+        display: inline-block;
+        width: 8rem;
+        margin: 1rem 1rem;
+      }
       &__img{
-
+        width: 100%;
       }
     }
   }
@@ -37,11 +47,15 @@
       display: inline-block;
       font-size: 1.2rem;
       color: $primary-text-color-gray;
+      @include respond(tablet-middle){
+        display: none;
+      }
       &__icon{
         font-size: 2rem;
         color:$primary-icon-color-gray;
         transform: rotateY(180deg);
         padding-left: 1rem;
+
       }
     }
     &__price{
@@ -50,11 +64,18 @@
       font-weight: bold;
       letter-spacing: .1rem;
       padding: 0 1rem;
+      @include respond(phone){
+        font-size: 1.5rem;
+      }
     }
     &__quantity{
       display: inline-block;
       width: 6rem;
       margin: 0 2rem;
+      @include respond(phone){
+        width:4rem;
+        margin:0 1rem;
+      }
       &--only{
         background-color: $primary-bg-color-gray-light;
         height:4rem;

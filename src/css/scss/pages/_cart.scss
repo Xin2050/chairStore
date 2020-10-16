@@ -8,12 +8,21 @@
         width: 100%;
         line-height: 1.5;
         padding-bottom: 5rem;
+        @include respond(tablet){
+            display: block;
+        }
         &__left{            
             font-size: 4rem;
-            font-weight: 600;            
+            font-weight: 600;
+            @include respond(phone){
+                text-align: center;
+            }
         }
         &__right{
             padding-top: .5rem;
+            @include respond(phone){
+                text-align: center;
+            }
             &__text1{
                 font-weight: bold;
                 font-size: 1.7rem;
@@ -30,14 +39,22 @@
         font-size: 1.5rem;
         border-collapse: collapse;
         width: 100%;
+        @include respond(phone){
+
+        }
         &__head{
             display: table-header-group;
+            @include respond(tablet-middle){
+                display: none;
+            }
+
             &__col{
                 display: table-cell;  
                 &:last-child{
                     text-align: right;
                 }
             }
+
         }
         &__body{
             display: table-row-group;
@@ -49,24 +66,30 @@
                 height: 12rem;
                 min-height: 5rem;
             }
-            &__row--delAnimation{
-                animation-fill-mode: forwards;
-                animation: deleteRow .5s ease-out .1s;
-            }
-            &__row--deleted{
-                display: none;
-            }
+
             &__col{
                 vertical-align:middle;
                 display: table-cell;
                 font-size: 1.7rem;
                 font-weight: bold;
+                @include respond(tablet-middle){
+                    display: table-row;
+                }
+                &:not(:first-child){
+                    @include respond(tablet-middle) {
+                        line-height: 3;
+                    }
+                }
                 &:first-child{
                     width: 40%;
                     min-width: 40rem;
                 }
                 &:last-child{
                     text-align: right;
+                    @include respond(tablet-middle){
+                        text-align: left;
+                        font-size:2rem;
+                    }
                 }
                 &__item{
                     display: table;
@@ -104,10 +127,18 @@
             font-size: 1.6rem;
             width: 100%;
             margin-top: 2rem;
-            
+            @include respond(tablet-middle){
+                display: flex;
+                flex-direction: column-reverse;
+                width: 100%;
+            }
             &__left{
                 display: table-cell;
                 width: 60%;
+                @include respond(tablet-middle){
+                    width: 100%;
+
+                }
                 &__title{
                     font-size: 1.8rem;
                     font-weight: bold;
@@ -126,8 +157,11 @@
                 display: table-cell;
                 vertical-align: bottom;
                 text-align: right;
-                width: 40%;  
-                           
+                width: 40%;
+                @include respond(tablet-middle){
+                    width: 100%;
+
+                }
             }
             &__table{
                 width: 100%;
@@ -171,6 +205,7 @@
 
     }
     &__footer__div{
+        margin: 2rem 0;
         text-align: center;
     }
     &__button--update{

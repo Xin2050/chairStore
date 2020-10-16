@@ -1,12 +1,50 @@
 .productPicFrame {
   display: table;
   width: 100%;
+  @include respond(tablet-middle){
+    display: block;
 
+  }
 
+  &__media__selectpic{
+    display: none;
+    width: 100%;
+
+    @include respond(tablet-middle){
+      display: block;
+    }
+
+    &__text{
+      font-size: 1.5rem;
+      color: $primary-text-color-gray;
+      text-align:center;
+    }
+    &__points{
+      margin: 1rem 0;
+      text-align: center;
+
+      &__dot{
+        display: inline-block;
+        margin: 0 .5rem;
+        background: $primary-bg-color-gray-light;
+        border-radius: 50%;
+        width: 1.5rem;
+        height: 1.5rem;
+        cursor:pointer;
+        &__selected{
+          background: black;
+        }
+      }
+    }
+  }
   &__left {
     display: table-cell;
     vertical-align: top;
     width: 10%;
+    @include respond(tablet-middle){
+      display: none;
+      width: 0%;
+    }
 
     &__side {
       display: flex;
@@ -44,10 +82,18 @@
     display: table-cell;
     width: 90%;
     vertical-align: top;
+    @include respond(tablet-middle){
+      display: block;
+      width: 100%;
+    }
     &__main {
       width: 100%;
       padding: 0 0 1rem 1rem;
       min-width: 40rem;
+      @include respond(tablet-middle){
+        max-width: 75rem;
+      }
+
       &__img {
         width: 100%;
         overflow: hidden;

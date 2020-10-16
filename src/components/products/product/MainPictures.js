@@ -6,6 +6,7 @@ import Popup from "../Popup";
 const MainPictures = ({media,id}) => {
 
     const [currentPic,setCurrentPic] = useState(media[0])
+    const [selectedIndex,setSelectedIndex] = useState(0);
     const max = 5;
     const [popup,setPopup]  = useState(null);
     $(()=>{
@@ -14,9 +15,21 @@ const MainPictures = ({media,id}) => {
         const bottomBorder  = $(".productFrame").height()+$(".productFrame").offset().top;
 
         //console.log(bottomBorder);
-
-        $(window).scroll(
+        $(window).resize(
             ()=>{
+                if($(window).width()<800){
+                    picBox.removeClass("productPicFrame--fixed").removeAttr("style")
+                    $(".productFrame__left").removeClass("productFrame__sitdown")
+                }
+
+            }
+        )
+        $(window).scroll(
+
+            ()=>{
+                if($(window).width()<800){
+                    return;
+                }
                 let w = picBox.width();
                 let h = $(".productPicFrame__right__main").height();
                 let changeLine = bottomBorder - h;
@@ -67,6 +80,37 @@ const MainPictures = ({media,id}) => {
         }
         return rendedList;
     }
+    const renderImgPointsList = ()=>{
+
+        const total = media.length;
+        const rendedList = [];
+        for(let i=0;i<total;i++){
+            if(media[i]){
+                let css = "";
+                if(currentPic===media[i]){
+                    css = " productPicFrame__media__selectpic__points__dot__selected"
+                }
+                rendedList.push(
+                    <div className={`productPicFrame__media__selectpic__points__dot${css}`}
+                         key={i} onClick={()=>{
+                        setCurrentPic(media[i]);
+                        setSelectedIndex(i);
+                    }}
+                    >
+                    </div>
+                )
+            }
+        }
+        return (
+            <div className="productPicFrame__media__selectpic">
+                <div className="productPicFrame__media__selectpic__text">{`${selectedIndex+1} of ${total}`}</div>
+                <div className="productPicFrame__media__selectpic__points">
+                    {rendedList}
+                </div>
+            </div>
+        )
+
+    }
     const openPopup =()=>{
         setPopup(<Popup id={id} onClose={closePopup} />)
     }
@@ -85,6 +129,7 @@ const MainPictures = ({media,id}) => {
                 <div className="productPicFrame__right__main">
                     <img src={currentPic} alt="" className="productPicFrame__right__main__img"/>
                 </div>
+                {renderImgPointsList()}
                 <div className="productPicFrame__right__main__dimensions" onClick={()=>{
                     const top = $(".spe").offset().top;
                     for(let i=1;i<=100;i++){

@@ -2,7 +2,7 @@ import React, {useRef} from 'react';
 import NavBar from "../products/NavBar";
 import CartHead from "./CartHead";
 import Cart from "./Cart";
-import {createOrder,actPayment} from "../../actions";
+import {createOrder} from "../../actions";
 import {connect} from 'react-redux'
 
 import requestAuth from "../auth/requestAuth";
