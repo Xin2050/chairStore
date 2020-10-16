@@ -4,7 +4,7 @@ import {fetchCartListAndProducts} from "../../actions";
 import {connect} from 'react-redux'
 import FixedCartLayer from "../cart/FixedCartLayer";
 import AccountMenu from "../menu/AccountMenu";
-
+import loadToken from "../auth/loadToken";
 import $ from 'jquery';
 
 const HeadMenu = (props) => {
@@ -185,4 +185,4 @@ const mapStateToProps = (state) => {
     const counter = Object.values(state.cart.data).reduce((total, item) => total + item.quantity, 0)
     return {counter,auth:state.auth};
 }
-export default connect(mapStateToProps, {fetchCartListAndProducts})(HeadMenu);
+export default connect(mapStateToProps, {fetchCartListAndProducts})(loadToken(HeadMenu));

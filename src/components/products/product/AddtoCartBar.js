@@ -10,7 +10,7 @@ import Spinner from "../../Spinner";
 
 
 const AddtoCartBar = (props) => {
-    const {data,fetchOptions,addToCart,total,product} = props;
+    const {data,fetchOptions,addToCart,product} = props;
     const [buttonText,setButtonText] = useState("Add To Cart");
     const btnref = useRef();
 

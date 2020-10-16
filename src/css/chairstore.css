@@ -2205,9 +2205,19 @@ select {
   display: flex;
   justify-content: space-between;
 }
+@media only screen and (max-width: 50em) {
+  .account__content {
+    flex-direction: column;
+  }
+}
 .account__content__signInOrRegisterModel {
   width: 50%;
   padding: 2rem 2rem;
+}
+@media only screen and (max-width: 50em) {
+  .account__content__signInOrRegisterModel {
+    width: 100%;
+  }
 }
 .account__content__signInOrRegisterModel__secondaryTitle {
   font-size: 2.5rem;
