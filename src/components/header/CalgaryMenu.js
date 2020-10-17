@@ -4,11 +4,13 @@ import {useLocation} from 'react-router';
 
 import $ from 'jquery';
 import history from "../../base/history";
+import SubMenu from "./SubMenu";
 
 const CalgaryMenu = () => {
     const url = useLocation().pathname;
     $(()=>{
         if(url!=="/"){
+            $(".calgaryMenu").removeClass("calgaryMenu--fixed")
             $(window).off("scroll")
             return;
         }
@@ -17,7 +19,7 @@ const CalgaryMenu = () => {
         $(window).scroll(
             ()=>{
 
-                if($(document).scrollTop()>=menuPosition){
+                if(($(document).scrollTop()>=menuPosition)&&(url==="/")){
                     $(".calgaryMenu").addClass("calgaryMenu--fixed")
                 }else{
                     $(".calgaryMenu").removeClass("calgaryMenu--fixed")
@@ -65,7 +67,16 @@ const CalgaryMenu = () => {
                     <Link to="#" className="menuBtn--redLine calgaryMenu__Item">Lighting</Link>
                     <Link to="#" className="menuBtn--redLine calgaryMenu__Item">Accessories</Link>
                     <Link to="#" className="menuBtn--redLine calgaryMenu__Item">Gaming</Link>
+                    <Link to="#"
+                        onClick={()=>{
+                            $('#account_submenu').addClass("submenu--show")
+                        }}
+                          className="menuBtn--redLine calgaryMenu__Item menuBtn__account">
+                        Account
+                    </Link>
+                    <SubMenu />
                 </div>
+
             </div>
 
 

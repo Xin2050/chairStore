@@ -89,12 +89,11 @@ const setPaypalData = (paypal, actPay) => {
                 // Show a confirmation message to the buyer
                 actPay(res);
                 // window.alert('Thank you for your purchase!' + JSON.stringify(res));
-                console.log('--->>>>>>', JSON.stringify(res));
+                //console.log('--->>>>>>', JSON.stringify(res));
 
-                actPay('res');
-                window.alert('Thank you for your purchase!' + JSON.stringify(res));
-            }).catch(res => console.log('failedxxx', res))
-                ;
+                //actPay('res');
+                //window.alert('Thank you for your purchase!');
+            }).catch(res => console.log('failedxxx', res));
         }
     }
 };

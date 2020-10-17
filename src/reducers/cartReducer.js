@@ -44,7 +44,7 @@ export default (state = {}, action) => {
             return updatedState;
 
         case CART_CLEAR:
-            newstate  = {data:[],subtotal:0};
+            newstate  = {...state,data:[],subtotal:0};
             __saveCart(newstate);
             return newstate;
         default:

@@ -16,9 +16,10 @@ import {
     AUTH_USER,
     AUTH_CHECK,
     AUTH_ERROR, SIGN_OUT,
-    CREATE_ORDER
+    CREATE_ORDER, ORDER_PAYED, CART_CLEAR
 } from "./types";
 import _ from 'lodash';
+import history from "../base/history";
 
 
 export const authCheck = (callback) => async dispatch => {
@@ -229,7 +230,7 @@ export const loadOrder=()=>async dispatch=>{
     dispatch({type:'LOAD_FROM_LOCAL'});
 }
 
-export const actPayment  = (res, order, notes) => dispatch => {
+export const actPayment  = (res, order, notes) => async dispatch => {
 
     let data = {};
     console.log('actPayment--->>>>>>>>>', res);
@@ -249,6 +250,12 @@ export const actPayment  = (res, order, notes) => dispatch => {
     // dispatch({type: PAYMENT_CREATE, payload: data});
 
     const token  = localStorage.getItem('token');
-    Server.post('/payment', data, {headers :{'Authorization':`Bear ${token}`}})
+    const request = await Server.post('/payment', data, {headers :{'Authorization':`Bear ${token}`}})
+    dispatch({type: ORDER_PAYED, payload: request.data});
+    dispatch({type:CART_CLEAR})
+
+    history.push('/cart/done');
+
+
 
 };

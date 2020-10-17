@@ -25,7 +25,15 @@
       border-bottom-color: red !important;
     }
   }
+  &__account{
+    display: none;
+    color: $primary-text-color-red !important;
+    @include respond(phone){
+      display: block;
+    }
+  }
 }
+
 
 
 

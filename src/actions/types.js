@@ -24,4 +24,6 @@ export const CHECK_EMAIL = 'CHECK_EMAIL';
 export const SIGN_OUT = 'SIGN_OUT';
 
 export const CREATE_ORDER = 'CREATE_ORDER';
+export const ORDER_PAYED = 'ORDER_PAYED';
+
 

@@ -4,9 +4,11 @@ import {connect} from 'react-redux';
 import {loadOrder} from "../../actions";
 import Spinner from "../Spinner";
 import setPaypalData from "../../apis/paypal";
-
+import {actPayment} from "../../actions";
 
 class PayOrder extends React.Component{
+
+
     constructor() {
 
         super();
@@ -31,11 +33,12 @@ class PayOrder extends React.Component{
         if(!this.props.order.data){
             return <Spinner message="Loading..."/>
         }
+        const order = this.props.order.data;
         return (
             <div>
                 <h2>Order Information:</h2>
-                <h3>ID:{this.props.order.data.id}</h3>
-                <h3>........</h3>
+                <h2>ID:{order.id}</h2>
+                <h2>Total:0.36 USD</h2>
             </div>
         )
     }
@@ -60,4 +63,4 @@ const mapStateToProps = (state) => {
         order: state.order
     }
 }
-export default connect(mapStateToProps, {loadOrder})(requestAuth(PayOrder));
+export default connect(mapStateToProps, {loadOrder,actPayment})(requestAuth(PayOrder));

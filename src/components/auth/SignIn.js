@@ -9,7 +9,7 @@ import RegisterForm from "./RegisterForm";
 
 const SignIn = (props) => {
 
-    console.log(props);
+
     const [lasturl] = useState(()=>{
         if(props.location?.state?.lasturl){
             return props.location.state.lasturl;

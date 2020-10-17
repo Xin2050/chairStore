@@ -12,7 +12,7 @@ const HeadMenu = (props) => {
     const [isFirst, setIsFirst] = useState(true);
     const [fixedCart, setFixedCart] = useState(null);
     const [isClose, setIsClose] = useState(false);
-    const [isShow,setIsShow] = useState(false);
+
     const [debouncedShow,setDebouncedShow] = useState(false);
 
     const accountRef = useRef();
@@ -41,18 +41,26 @@ const HeadMenu = (props) => {
         if (props.counter === "loading...") {
             return;
         }
+
         if ((props.counter >= 0) && (!isFirst)) {
+
             setTimeout(()=>{
-                setFixedCart(<FixedCartLayer onMouseHover={keepShow} onMouseLeave={prepareClosing}/>);
+                setFixedCart(<FixedCartLayer onMouseHover={keepShow}
+                                             onMouseLeave={prepareClosing}
+                                             closeNow={closeCartImmediately}
+                />);
             },delay);
-            //setIsClose(true);
-            setIsShow(false);
+
             setDebouncedShow(false);
         } else {
             setIsFirst(false);
         }
     }
-    const closeFixedCart = () => {
+    const closeCartImmediately = ()=>{
+        prepareClosing();
+        closeFixedCart(0);
+    }
+    const closeFixedCart = (delay=500) => {
         if (!isClose) {
             return;
         }
@@ -60,12 +68,14 @@ const HeadMenu = (props) => {
             setFixedCart(null);
             setIsClose(false);
 
-        }, 500)
+        }, delay)
         return () => {
             clearTimeout(timeid);
         }
     }
+
     const prepareShow=()=>{
+
         if(window.location.pathname==="/cart"){
             return;
         }
@@ -73,7 +83,8 @@ const HeadMenu = (props) => {
             return;
         }
         const timeid = setTimeout(()=>{
-            setIsShow(true);
+            showFixedCart();
+            //setIsShow(true);
         },500);
         return ()=>{
             clearTimeout(timeid);
@@ -84,7 +95,7 @@ const HeadMenu = (props) => {
     useEffect(showFixedCart, [props.counter]);
     useEffect(prepareShow,[debouncedShow]);
     useEffect(closeFixedCart, [isClose]);
-    useEffect(showFixedCart,[isShow]);
+
 
 
 
@@ -159,7 +170,7 @@ const HeadMenu = (props) => {
                                   setDebouncedShow(false);
                                   prepareClosing();
                               }}
-                              onMouseEnter={() => {
+                              onMouseOver ={() => {
                                   setDebouncedShow(true);
                                   keepShow();
                               }}>
@@ -172,7 +183,7 @@ const HeadMenu = (props) => {
             </div>
             {fixedCart}
 
-            <AccountMenu onMouseHover={keepMenu} onMouseLeave={closeMenu}/>
+            <AccountMenu onMouseHover={keepMenu} onMouseLeave={closeMenu} />
         </>
     );
 

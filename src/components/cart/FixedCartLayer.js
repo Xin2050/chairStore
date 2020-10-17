@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {NumberFormatted} from "../../apis/NumberFormat";
 import FixedCartImage from "./FixedCartImage";
 import FixedCartNameAndOptions from "./FixedCartNameAndOptions";
+import history from "../../base/history";
 
 
 const FixedCartLayer = (props) => {
@@ -36,7 +37,7 @@ const FixedCartLayer = (props) => {
         })
     }
 
-    const res = (
+    return(
         <div className="fixedCart" onMouseEnter={props.onMouseHover} onMouseLeave={props.onMouseLeave}>
             <div className="fixedCart__title">Added to Cart</div>
             <table>
@@ -53,24 +54,26 @@ const FixedCartLayer = (props) => {
             <div className="fixedCart__checkout">
                 <div className="fixedCart__checkout__firstline flex_Row_SpaceBetween_Center">
                     <div>
-                        <button className="form__PrimaryBtn form__PrimaryBtn--gary">Review Cart</button>
+                        <button className="form__PrimaryBtn form__PrimaryBtn--gary"
+                                onClick={()=>{
+                                    props.closeNow();
+                                    history.push('/cart');
+                                }}
+                        >Review Cart</button>
                     </div>
                     <div>
-                        <button className="form__PrimaryBtn">Check Out</button>
+                        <button className="form__PrimaryBtn" onClick={()=>{
+                            props.closeNow();
+                            history.push("/cart/checkout");
+                        }}>Check Out</button>
                     </div>
                 </div>
-                <div className="fixedCart__checkout__secondline">OR</div>
-                <div className="fixedCart__checkout__thirdline">
-                    <button className="form__PrimaryBtn form__PrimaryBtn--gary fixedCart__checkout__paypalbutton">
-                        <span>Checkout</span>
-                    </button>
-                </div>
+
             </div>
 
         </div>
-    );
+    )
 
-    return res;
 };
 const mapStateToProps = (state) => {
     return {

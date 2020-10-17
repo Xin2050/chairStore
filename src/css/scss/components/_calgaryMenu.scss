@@ -13,97 +13,104 @@
   @include clearfix;
 
 
-
-
-  &--fixed{
+  &--fixed {
     position: fixed;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     z-index: 9;
   }
 
   &__search {
-    float:right;
+    float: right;
     width: 5rem;
     height: 100%;
     font-size: 2.5rem;
-    position:relative;
+    position: relative;
 
-    @include respond(tablet){
+    @include respond(tablet) {
       color: rgb(45, 43, 43);
       font-size: 2.5rem;
       width: 10rem;
       margin-right: 2.5rem;
     }
-    @include respond(phone){
+    @include respond(phone) {
       width: 6rem;
       margin-right: .5rem;
     }
-    &__icongroup{
+
+    &__icongroup {
       width: 100%;
 
       @include absCenter;
     }
-    &__icon{
 
-      @include respond(tablet){
-        margin-right:2rem;
+    &__icon {
+
+      @include respond(tablet) {
+        margin-right: 2rem;
         display: inline-block;
       }
-      @include respond(phone){
+      @include respond(phone) {
         margin-right: .2rem;
         font-size: 2rem;
       }
 
     }
   }
-  &__Items{
+
+  &__Items {
+    z-index: 10;
     @include absCenter;
     display: block;
 
 
-    @include respond(tablet){
+    @include respond(tablet) {
       @include cancelCenter;
       //display: none;
       visibility: hidden;
       opacity: 0;
       position: fixed;
-      top:0;
-      left:0;
+      top: 0;
+      left: 0;
       height: 100%;
       width: 100%;
-      background: rgba($primary-bg-color-gray-light,.8);
-      z-index: 10;
-      transition: transform .3s ease-in ;
+      background: rgba($primary-bg-color-gray-light, .8);
+      transition: transform .3s ease-in;
+
     }
 
-    &--show{
+    &--show {
       visibility: visible;
       opacity: 1;
 
-      & div{
-        transform: translateX(100%);
+      &>div{
+
+        @include respond(tablet) {
+          transform: translateX(100%);
+        }
+
       }
     }
 
 
-    &__list{
-      transition: transform .3s ease-in ;
+    &__list {
+
       transform: none;
 
 
-      @include respond(tablet){
+      @include respond(tablet) {
         position: fixed;
-        top:0;
-        left:-50%;
-        height:100%;
-        width:50%;
-        border:1px solid $primary-border-color-gray;
+        top: 0;
+        left: -50%;
+        height: 100%;
+        width: 50%;
+        border: 1px solid $primary-border-color-gray;
         background: $primary-bg-color-gray-light;
         box-shadow: 0 1rem 3rem rgba(black, .1);
         z-index: 11;
         display: flex;
         flex-direction: column;
+        transition: transform .3s ease-in;
       }
     }
   }
@@ -114,7 +121,7 @@
     height: 9rem;
     margin: 0 1rem;
 
-    @include respond(tablet){
+    @include respond(tablet) {
       width: 100%;
       font-size: 1.7rem;
       font-weight: bold;
@@ -122,9 +129,9 @@
       height: 7rem;
       margin: 0;
       background: white;
-      border-bottom:1px solid $primary-border-color-gray !important;
+      border-bottom: 1px solid $primary-border-color-gray !important;
       position: relative;
-      &::after{
+      &::after {
         content: "";
         position: absolute;
         top: 30%;
@@ -134,7 +141,7 @@
         border-right: 2px solid;
         width: 1.2rem;
         height: 1.3rem;
-        border-color: rgba($text-color-gray,.5);
+        border-color: rgba($text-color-gray, .5);
         transform: rotate(45deg);
         margin: 1rem auto auto 1rem;
       }
@@ -143,27 +150,122 @@
 
     &--selected {
       border-bottom-color: red !important;
-      @include respond(tablet){
-        border-bottom:1px solid $primary-border-color-gray !important;
+      @include respond(tablet) {
+        border-bottom: 1px solid $primary-border-color-gray !important;
       }
     }
-
-
-
-
 
 
   }
 }
 
+.submenu {
+
+  z-index: 12;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  height: 100%;
+  width: 0;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $primary-border-color-gray;
+  background: $primary-bg-color-gray-light;
+  box-shadow: 0 1rem 3rem rgba(black, .1);
+  transition: all .3s ease-in;
+  opacity: 0;
+  visibility: hidden;
+
+  & div,a{
+    display: none;
+  }
+
+  &--show{
+    opacity:1;
+    visibility: visible;
+    left:0;
+    width: 100%;
+    & div,a{
+      display: block;
+    }
+
+  }
+
+  &__title {
+    width: 100%;
+    font-size: 1.7rem;
+    font-weight: bold;
+    padding: 2.2rem 3rem;
+    height: 7rem;
+    margin: 0;
+    background: white;
+    border-bottom: 1px solid $primary-border-color-gray !important;
+    position: relative;
+    text-align: right;
+    &:hover{
+      opacity: .7;
+      cursor: pointer;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: 30%;
+      left: 6%;
+      display: inline-block;
+      border-top: 2px solid;
+      border-right: 2px solid;
+      width: 1.2rem;
+      height: 1.3rem;
+      border-color: rgba($text-color-gray, .5);
+      transform: rotate(-135deg);
+      margin: 1rem auto auto 1rem;
+    }
+  }
+
+  &__item {
+    &,&:visited{
+      width: 100%;
+      font-size: 1.7rem;
+      font-weight: bold;
+      padding: 2.2rem 2rem;
+      height: 7rem;
+      margin: 0;
+      background: white;
+      border-bottom: 1px solid $primary-border-color-gray !important;
+      position: relative;
+      text-decoration: none;
+      color: $primary-text-color-gray;
+    }
+    &:hover{
+      opacity: .7;
+      cursor: pointer;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: 30%;
+      left: 76%;
+      display: inline-block;
+      border-top: 2px solid;
+      border-right: 2px solid;
+      width: 1.2rem;
+      height: 1.3rem;
+      border-color: rgba($text-color-gray, .5);
+      transform: rotate(45deg);
+      margin: 1rem auto auto 1rem;
+
+    }
+  }
+}
+
 .logoBox {
-  float:left;
+  float: left;
   height: 100%;
   width: 8rem;
-  position:relative;
+  position: relative;
 
-  @include respond(tablet){
-    float:none;
+  @include respond(tablet) {
+    float: none;
     display: block;
     position: relative;
     width: auto;
@@ -172,72 +274,78 @@
   }
 
 }
-.logo{
+
+.logo {
   @include absCenter;
   height: 4rem;
   width: 4rem;
-  @include respond(tablet){
+  @include respond(tablet) {
     display: inline-block;
     position: relative;
 
-    top:auto;
-    left:auto;
+    top: auto;
+    left: auto;
     transform: none;
   }
-  @include respond(phone){
-    width:3rem;
+  @include respond(phone) {
+    width: 3rem;
     height: 3rem;
   }
-  &__img{
+
+  &__img {
     width: 100%;
-    @include respond(tablet){
+    @include respond(tablet) {
       vertical-align: middle;
     }
   }
 }
-.mediaSrc{
 
-  &__mainMenuIcon{
+.mediaSrc {
+
+  &__mainMenuIcon {
     display: none;
     position: relative;
 
-    @include respond(tablet){
-      float:left;
+    @include respond(tablet) {
+      float: left;
       display: block;
       width: 8rem;
       height: 100%;
       font-size: 3rem;
     }
-    @include respond(phone){
+    @include respond(phone) {
       font-size: 2.5rem;
     }
-    &--center{
+
+    &--center {
       @include absCenter;
     }
   }
-  &__CompanyName{
+
+  &__CompanyName {
     display: none;
-    @include respond(tablet){
+    @include respond(tablet) {
       display: inline-block;
       color: red;
       font-size: 2rem;
       letter-spacing: .2rem;
       vertical-align: middle;
-      margin-left:1.5rem;
+      margin-left: 1.5rem;
 
     }
-    @include respond(phone){
+    @include respond(phone) {
       font-size: 1.5rem;
       letter-spacing: .1rem;
     }
   }
-  &__cartIcon{
+
+  &__cartIcon {
     display: none;
-    @include respond(tablet){
+    @include respond(tablet) {
       display: inline-block;
       margin-left: 1rem;
     }
-    @include respond(phone){
+    @include respond(phone) {
       font-size: 2rem;
     }
   }
