@@ -7,15 +7,20 @@
 }
 html{
   font-size:62.5%; //16px
-
+  overflow: hidden;
+  overflow-y:auto;
   @include respond(big-screen) {
     font-size: 75%;
   }
-
+  &::-webkit-scrollbar{display: none}
 }
 body{
   box-sizing: border-box;
   font-family: Meta,Arial,Helvetica,"sans-serif";
+  overflow: hidden;
+  overflow-y:auto;
+
+  &::-webkit-scrollbar{display: none}
 
   font-weight: 400;
   line-height: 1.7;

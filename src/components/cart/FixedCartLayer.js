@@ -6,6 +6,7 @@ import {NumberFormatted} from "../../apis/NumberFormat";
 import FixedCartImage from "./FixedCartImage";
 import FixedCartNameAndOptions from "./FixedCartNameAndOptions";
 import history from "../../base/history";
+import $ from 'jquery';
 
 
 const FixedCartLayer = (props) => {
@@ -13,7 +14,13 @@ const FixedCartLayer = (props) => {
         props.fetchCartListAndProducts();
     }
     useEffect(load, []);
-
+    $(()=>{
+        if($(window).width()<=800){
+            setTimeout(()=>{
+                props.closeNow()
+            },1000);
+        }
+    })
 
     const renderedCartList = () => {
         return props.cart.data.map((item, index) => {
@@ -72,6 +79,7 @@ const FixedCartLayer = (props) => {
             </div>
 
         </div>
+
     )
 
 };

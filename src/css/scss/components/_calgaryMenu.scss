@@ -22,7 +22,7 @@
 
   &__search {
     float: right;
-    width: 5rem;
+    width: 9rem;
     height: 100%;
     font-size: 2.5rem;
     position: relative;
@@ -30,11 +30,11 @@
     @include respond(tablet) {
       color: rgb(45, 43, 43);
       font-size: 2.5rem;
-      width: 10rem;
+
       margin-right: 2.5rem;
     }
     @include respond(phone) {
-      width: 6rem;
+
       margin-right: .5rem;
     }
 
@@ -146,6 +146,13 @@
         margin: 1rem auto auto 1rem;
       }
     }
+    @include respond(phone){
+      height: 5rem;
+      padding: 1.2rem 2rem;
+      &::after{
+        top:14%;
+      }
+    }
 
 
     &--selected {
@@ -202,6 +209,7 @@
     border-bottom: 1px solid $primary-border-color-gray !important;
     position: relative;
     text-align: right;
+
     &:hover{
       opacity: .7;
       cursor: pointer;
@@ -219,6 +227,13 @@
       border-color: rgba($text-color-gray, .5);
       transform: rotate(-135deg);
       margin: 1rem auto auto 1rem;
+    }
+    @include respond(phone){
+      height: 5rem;
+      padding: 1.2rem 4rem;
+      &::after{
+        top:18%;
+      }
     }
   }
 
@@ -254,6 +269,13 @@
       transform: rotate(45deg);
       margin: 1rem auto auto 1rem;
 
+    }
+    @include respond(phone){
+      height: 5rem;
+      padding: 1.2rem 2rem;
+      &::after{
+        top:14%;
+      }
     }
   }
 }

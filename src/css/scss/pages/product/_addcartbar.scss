@@ -9,6 +9,13 @@
   border-top: 1px solid $primary-border-color-gray;
   @include clearfix;
 
+  @include respond(phone){
+    &>div{
+      display: flex;
+      flex-direction: row;
+    }
+  }
+
   &__left{
     float: left;
     display: block;
@@ -43,6 +50,11 @@
     float: right;
     display: block;
     margin: 2rem 2rem;
+    @include respond(phone){
+      margin:auto;
+    }
+
+
     &__shipping{
       display: inline-block;
       font-size: 1.2rem;

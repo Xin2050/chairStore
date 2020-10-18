@@ -176,7 +176,15 @@
 }
 
 .cart__counter{
+  display: inline-block;
   font-size: 1.2rem;
   color: red;
   margin-left: 1rem;
+  &--media{
+    display: none;
+    @include respond(phone){
+      margin-left: 0;
+      display: inline-block;
+    }
+  }
 }

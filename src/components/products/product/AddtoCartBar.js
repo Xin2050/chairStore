@@ -51,6 +51,7 @@ const AddtoCartBar = (props) => {
     return (
         (!product)?<Spinner message="loading"/>:
         <div className="addCartBar">
+            <div>
             <div className="addCartBar__left">
                 <div className="addCartBar__left__namebox">
                     {product.name}
@@ -76,6 +77,7 @@ const AddtoCartBar = (props) => {
                         {buttonText}
                     </button>
                 </div>
+            </div>
             </div>
         </div>
     )

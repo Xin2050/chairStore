@@ -76,7 +76,7 @@
         font-size: 3rem;
       }
       @include respond(phone){
-        font-size: 3rem;
+        font-size: 2rem;
       }
     }
     & p{
@@ -124,10 +124,10 @@
         font-size: 4rem;
       }
       @include respond(tablet-small){
-        font-size: 3rem;
+        font-size: 2。5rem;
       }
       @include respond(phone){
-        font-size: 3rem;
+        font-size: 2rem;
       }
     }
     & p{

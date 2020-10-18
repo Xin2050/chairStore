@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import NavBar from "../products/NavBar";
 import CartHead from "./CartHead";
 import Cart from "./Cart";
@@ -7,16 +7,20 @@ import {connect} from 'react-redux'
 
 import requestAuth from "../auth/requestAuth";
 import history from "../../base/history";
+import Spinner from "../Spinner";
+import $ from 'jquery';
 
 
 
 
 const CheckoutPage = (props) => {
     const submitbtn = useRef();
+    const [loading,setLoading] = useState(null);
 
     const next=()=>{
         submitbtn.current.innerText = "Confirm Order";
         submitbtn.current.disabled = false;
+        setLoading(null);
         history.push("/cart/payorder");
     }
     const error=(message)=>{
@@ -25,6 +29,9 @@ const CheckoutPage = (props) => {
         alert(message);
     }
     const createOrder=()=>{
+        setLoading(<Spinner message={"Order is being processed, please wait."} top={$(document).scrollTop()}/> );
+
+
         submitbtn.current.innerText = "Create Order...";
         submitbtn.current.disabled = true;
         props.createOrder(props.auth.authorization,props.cart,next,error);
@@ -42,7 +49,9 @@ const CheckoutPage = (props) => {
                     Confirm Order
                 </button>
             </div>
+            {loading}
         </div>
+
     );
 };
 const mapStateToProps=(state)=>{

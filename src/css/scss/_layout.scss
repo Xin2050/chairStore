@@ -13,6 +13,9 @@
     text-align: center;
     font-weight: 700;
     font-size: 4.5rem;
+    @include respond(phone){
+      font-size: 3rem;
+    }
   }
 }
 .flex_Row_SpaceBetween_Center {
@@ -36,14 +39,20 @@
 }
 
 .spinner{
-  background-color: rgb(black,.6);
+  background-color: rgb(black,.7);
   position: absolute;
-  top:0;left:0;width: 100%;height: 100vh;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100vh;
   z-index: 99999;
   &__message{
     @include absCenter;
     font-size: 2rem;
     color:$primary-text-color-white;
+    @include respond(phone){
+      font-size: 1.2rem;
+    }
   }
   &__404{
     background-color: rgb(black,1);

@@ -1,7 +1,9 @@
 .productInfo{
 
   &__basicInfo{
-
+    @include respond(tablet-middle){
+      margin-top:2rem;
+    }
     &__name{
       line-height: 1.2;
       font-size:2.5rem;
