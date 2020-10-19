@@ -9,6 +9,10 @@
   backdrop-filter: blur(5px);
   transition: all 2s;
 
+  @include respond(phone){
+    position: absolute;
+    min-height: 100vh;
+  }
 
   &__disable{
     // opacity: 0;
@@ -46,7 +50,9 @@
 
 
     }
-
+    @include respond(phone){
+      display: none;
+    }
 
   }
   &__right{
@@ -55,12 +61,26 @@
     left:25%;
     width: 75%;
     height: 100%;
+
+    @include respond(phone){
+
+      left:0;
+      width:100%
+    }
+
     &__content {
       @include absCenter;
       width: 75%;
       height: 80%;
       background-color: #f3f3f3;
+      @include respond(phone){
+        position: relative;
+        @include cancelCenter;
 
+        margin: 6rem auto 2rem auto;
+        width: 98%;
+
+      }
       &__name{
         color: rgba($primary-text-color-white,.8);
         font-size: 1.5rem;
@@ -69,6 +89,9 @@
         top:5%;
         left:50%;
         transform: translateX(-50%);
+        @include respond(phone){
+          top:3rem;
+        }
       }
       &__page{
         color: rgba($primary-text-color-white,.8);
@@ -78,6 +101,9 @@
         top:92%;
         left:50%;
         transform: translateX(-50%);
+        @include respond(phone){
+          position: relative;
+        }
       }
 
       &__close {
@@ -109,7 +135,9 @@
         color: rgba(gray, .6);
         cursor: pointer;
         transition: all .3s;
-
+        @include respond(phone){
+          display: none;
+        }
         &--left {
           left: -7rem;
         }
@@ -124,12 +152,16 @@
       }
 
       &__imgBox{
+        @include respond(phone){
 
+        }
         &__imgList {
           display: flex;
           flex-direction: row;
-
           overflow: hidden;
+          @include respond(phone){
+            flex-direction: column;
+          }
 
         }
       }

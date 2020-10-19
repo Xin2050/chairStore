@@ -1146,6 +1146,11 @@ select {
   box-shadow: 3px 10px 16px -8px rgba(0, 0, 0, 0.58);
   background-color: #fafafa;
 }
+@media only screen and (max-width: 37.5em) {
+  .fixedCart {
+    width: 90%;
+  }
+}
 .fixedCart__title {
   font-size: 2rem;
   padding: 2rem 0 2rem 2rem;
@@ -1344,6 +1349,12 @@ select {
   backdrop-filter: blur(5px);
   transition: all 2s;
 }
+@media only screen and (max-width: 37.5em) {
+  .popup {
+    position: absolute;
+    min-height: 100vh;
+  }
+}
 .popup__disable {
   transform: scale(0);
 }
@@ -1373,12 +1384,23 @@ select {
   border: 3px solid transparent;
   outline: 2px solid white;
 }
+@media only screen and (max-width: 37.5em) {
+  .popup__left {
+    display: none;
+  }
+}
 .popup__right {
   position: absolute;
   top: 0;
   left: 25%;
   width: 75%;
   height: 100%;
+}
+@media only screen and (max-width: 37.5em) {
+  .popup__right {
+    left: 0;
+    width: 100%;
+  }
 }
 .popup__right__content {
   position: absolute;
@@ -1389,6 +1411,17 @@ select {
   height: 80%;
   background-color: #f3f3f3;
 }
+@media only screen and (max-width: 37.5em) {
+  .popup__right__content {
+    position: relative;
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin: 6rem auto 2rem auto;
+    width: 98%;
+  }
+}
 .popup__right__content__name {
   color: rgba(255, 255, 255, 0.8);
   font-size: 1.5rem;
@@ -1398,6 +1431,11 @@ select {
   left: 50%;
   transform: translateX(-50%);
 }
+@media only screen and (max-width: 37.5em) {
+  .popup__right__content__name {
+    top: 3rem;
+  }
+}
 .popup__right__content__page {
   color: rgba(255, 255, 255, 0.8);
   font-size: 1.5rem;
@@ -1406,6 +1444,11 @@ select {
   top: 92%;
   left: 50%;
   transform: translateX(-50%);
+}
+@media only screen and (max-width: 37.5em) {
+  .popup__right__content__page {
+    position: relative;
+  }
 }
 .popup__right__content__close {
   position: absolute;
@@ -1433,6 +1476,11 @@ select {
   cursor: pointer;
   transition: all 0.3s;
 }
+@media only screen and (max-width: 37.5em) {
+  .popup__right__content_GoBtn {
+    display: none;
+  }
+}
 .popup__right__content_GoBtn--left {
   left: -7rem;
 }
@@ -1446,6 +1494,11 @@ select {
   display: flex;
   flex-direction: row;
   overflow: hidden;
+}
+@media only screen and (max-width: 37.5em) {
+  .popup__right__content__imgBox__imgList {
+    flex-direction: column;
+  }
 }
 .popup__right__content__img {
   object-fit: contain;

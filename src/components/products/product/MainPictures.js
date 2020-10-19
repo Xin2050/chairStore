@@ -9,6 +9,7 @@ const MainPictures = ({media,id}) => {
     const [selectedIndex,setSelectedIndex] = useState(0);
     const max = 5;
     const [popup,setPopup]  = useState(null);
+    let initX = -1;
     $(()=>{
         const picBox = $(".productPicFrame");
         const topBorder = picBox.offset().top;
@@ -119,6 +120,38 @@ const MainPictures = ({media,id}) => {
         setPopup(null);
         e.stopPropagation();
     }
+
+    let timeid;
+    const checkX = (e)=>{
+
+        e.persist()
+        if(initX===-1){
+            return;
+        }
+        if(timeid){
+            clearTimeout(timeid);
+        }
+        timeid = setTimeout(()=>{
+
+            if ((e.clientX-initX)>5) {
+                go(1);
+            } else if((e.clientX-initX)< -5){
+                go(-1)
+            }
+        },400);
+
+    }
+    const go = (y) => {
+        let next = selectedIndex + y;
+        if(next<0){
+            next = media.length-1
+        }else if(next>=media.length){
+            next = 0;
+        }
+        setSelectedIndex(next);
+        setCurrentPic(media[next])
+        initX = -1;
+    }
     return (
         <>
         <div className="productPicFrame">
@@ -127,7 +160,18 @@ const MainPictures = ({media,id}) => {
             </div>
             <div className="productPicFrame__right">
                 <div className="productPicFrame__right__main">
-                    <img src={currentPic} alt="" className="productPicFrame__right__main__img"/>
+                    <img src={currentPic} alt=""
+                         onPointerDown={e=>{
+                             if(e.button===0) {
+                                 initX = e.clientX;
+                             }
+                         }}
+
+                         onPointerMove={event => {
+                             console.log("move");
+                             checkX(event)
+                         }}
+                         className="productPicFrame__right__main__img"/>
                 </div>
                 {renderImgPointsList()}
                 <div className="productPicFrame__right__main__dimensions" onClick={()=>{
