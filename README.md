@@ -1,11 +1,3 @@
-#This Project only run on your own server
-
-You can pull server code from https://github.com/Xin2050/auth-server/tree/chairstore
-Follow readme's instructions to set up your MongoDB server.
-
-The Product list , product page and cart can work on Mark2Win server
-you could change src/actions/index.js head's import.
-
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
